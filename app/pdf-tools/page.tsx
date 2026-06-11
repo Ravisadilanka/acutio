@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function PDFToolsPage() {
   return (
     <main className="max-w-6xl mx-auto px-6 py-20">
@@ -12,21 +14,29 @@ export default function PDFToolsPage() {
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
 
-        <div className="border rounded-2xl p-6">
-          Merge PDF
-        </div>
+        <Link href="/pdf-tools/merge-pdf">
+          <div className="border rounded-2xl p-6">
+            Merge PDF
+          </div>
+        </Link>
 
-        <div className="border rounded-2xl p-6">
-          Split PDF
-        </div>
+        <Link href="/pdf-tools/split-pdf">
+          <div className="border rounded-2xl p-6">
+            Split PDF
+          </div>
+        </Link>
 
-        <div className="border rounded-2xl p-6">
-          Compress PDF
-        </div>
+        <Link href="/pdf-tools/compress-pdf">
+          <div className="border rounded-2xl p-6">
+            Compress PDF
+          </div>
+        </Link>
 
-        <div className="border rounded-2xl p-6">
-          PDF to JPG
-        </div>
+        <Link href="/pdf-tools/pdf-to-jpg">
+          <div className="border rounded-2xl p-6">
+            PDF to JPG
+          </div>
+        </Link>
 
         <div className="border rounded-2xl p-6">
           JPG to PDF
