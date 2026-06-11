@@ -29,7 +29,7 @@ export default function Hero() {
         <h1 className="text-6xl font-bold">
           All Your Essential
           <br />
-          Online Tools
+          Online Tools TEST
         </h1>
 
         <p className="mt-6 text-xl text-gray-600">
