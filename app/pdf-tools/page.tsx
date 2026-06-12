@@ -1,53 +1,51 @@
-import Link from "next/link";
+import CategoryCard from "@/components/CategoryCard";
 
 export default function PDFToolsPage() {
   return (
     <main className="max-w-6xl mx-auto px-6 py-20">
-
-      <h1 className="text-5xl font-bold">
-        PDF Tools
-      </h1>
+      <h1 className="text-5xl font-bold">PDF Tools</h1>
 
       <p className="mt-4 text-gray-600">
         Free PDF editing and conversion tools.
       </p>
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
+        <CategoryCard
+          title="Merge PDF"
+          description="Combine multiple PDF files into a single document."
+          href="/pdf-tools/merge-pdf"
+        />
 
-        <Link href="/pdf-tools/merge-pdf">
-          <div className="border rounded-2xl p-6">
-            Merge PDF
-          </div>
-        </Link>
+        <CategoryCard
+          title="Split PDF"
+          description="Divide a PDF file into individual pages or custom ranges."
+          href="/pdf-tools/split-pdf"
+        />
 
-        <Link href="/pdf-tools/split-pdf">
-          <div className="border rounded-2xl p-6">
-            Split PDF
-          </div>
-        </Link>
+        <CategoryCard
+          title="Compress PDF"
+          description="Reduce the file size of your PDFs without losing quality."
+          href="/pdf-tools/compress-pdf"
+        />
 
-        <Link href="/pdf-tools/compress-pdf">
-          <div className="border rounded-2xl p-6">
-            Compress PDF
-          </div>
-        </Link>
+        <CategoryCard
+          title="PDF to JPG"
+          description="Convert PDF pages to high-quality JPG images."
+          href="/pdf-tools/pdf-to-jpg"
+        />
 
-        <Link href="/pdf-tools/pdf-to-jpg">
-          <div className="border rounded-2xl p-6">
-            PDF to JPG
-          </div>
-        </Link>
+        <CategoryCard
+          title="JPG to PDF"
+          description="Convert JPG images to PDF documents."
+          href="/pdf-tools/jpg-to-pdf"
+        />
 
-        <div className="border rounded-2xl p-6">
-          JPG to PDF
-        </div>
-
-        <div className="border rounded-2xl p-6">
-          Rotate PDF
-        </div>
-
+        <CategoryCard
+          title="Rotate PDF"
+          description="Rotate PDF pages to the desired orientation."
+          href="/pdf-tools/rotate-pdf"
+        />
       </div>
-
     </main>
   );
 }
