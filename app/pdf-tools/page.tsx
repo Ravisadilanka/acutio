@@ -29,6 +29,12 @@ export default function PDFToolsPage() {
         />
 
         <CategoryCard
+          title="Rotate PDF"
+          description="Rotate PDF pages to the desired orientation."
+          href="/pdf-tools/rotate-pdf"
+        />
+        
+        <CategoryCard
           title="PDF to JPG"
           description="Convert PDF pages to high-quality JPG images."
           href="/pdf-tools/pdf-to-jpg"
@@ -40,11 +46,6 @@ export default function PDFToolsPage() {
           href="/pdf-tools/jpg-to-pdf"
         />
 
-        <CategoryCard
-          title="Rotate PDF"
-          description="Rotate PDF pages to the desired orientation."
-          href="/pdf-tools/rotate-pdf"
-        />
       </div>
     </main>
   );

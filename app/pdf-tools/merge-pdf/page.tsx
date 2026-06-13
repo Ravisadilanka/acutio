@@ -4,8 +4,9 @@ import { useState } from "react";
 import { PDFDocument } from "pdf-lib";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 
-import PdfDropzone from "@/components/PdfDropzone";
 import PdfFileCard from "@/components/PdfFileCard";
+import FileDropzone from "@/components/FileDropzone";
+import { toast } from "sonner";
 
 interface PdfItem {
   file: File;
@@ -56,7 +57,7 @@ export default function MergePdfPage() {
 
   const mergePdfs = async () => {
     if (files.length < 2) {
-      alert("Please upload at least 2 PDFs");
+      toast.error("Please upload at least 2 PDFs");
       return;
     }
 
@@ -102,7 +103,7 @@ export default function MergePdfPage() {
     } catch (error) {
       console.error(error);
 
-      alert("Failed to merge PDFs");
+      toast.error("Failed to merge PDFs");
     } finally {
       setLoading(false);
       setProgress(0);
@@ -119,7 +120,14 @@ export default function MergePdfPage() {
         </p>
       </div>
 
-      <PdfDropzone onFilesAdded={addFiles} />
+      <FileDropzone
+        onFilesAdded={addFiles}
+        title="Select PDF Files"
+        subtitle="Drag and drop PDFs here"
+        accept={{
+          "application/pdf": [".pdf"],
+        }}
+      />
 
       {files.length > 0 && (
         <>

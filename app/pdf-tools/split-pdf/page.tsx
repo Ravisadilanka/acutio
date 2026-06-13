@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 import { PDFDocument } from "pdf-lib";
-import PdfDropzone from "@/components/PdfDropzone";
 import PdfFileCard from "@/components/PdfFileCard";
+import FileDropzone from "@/components/FileDropzone";
+import { toast } from "sonner";
 
 type SplitMode = "all" | "ranges" | "extract";
 
@@ -37,7 +38,7 @@ export default function SplitPdfPage() {
     const bytes = await pdfDoc.save();
 
     const blob = new Blob([new Uint8Array(bytes)], {
-        type: "application/pdf",
+      type: "application/pdf",
     });
 
     const url = URL.createObjectURL(blob);
@@ -85,7 +86,7 @@ export default function SplitPdfPage() {
           .filter((p) => !isNaN(p) && p >= 1 && p <= totalPages);
 
         if (!pages.length) {
-          alert("Enter valid page numbers");
+          toast.error("Enter valid page numbers");
           return;
         }
 
@@ -133,7 +134,7 @@ export default function SplitPdfPage() {
     } catch (error) {
       console.error(error);
 
-      alert("Failed to split PDF");
+      toast.error("Failed to split PDF");
     } finally {
       setLoading(false);
     }
@@ -150,7 +151,14 @@ export default function SplitPdfPage() {
       </div>
 
       <div className="mt-10">
-        <PdfDropzone onFilesAdded={handleFiles} />
+        <FileDropzone
+          onFilesAdded={handleFiles}
+          title="Select PDF File"
+          subtitle="Upload a PDF to rotate"
+          accept={{
+            "application/pdf": [".pdf"],
+          }}
+        />
       </div>
 
       {file && (
