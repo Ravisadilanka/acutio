@@ -23,9 +23,9 @@ export default function PDFToolsPage() {
         />
 
         <CategoryCard
-          title="Compress PDF"
-          description="Reduce the file size of your PDFs without losing quality."
-          href="/pdf-tools/compress-pdf"
+          title="Sign PDF"
+          description="Draw and add your signature to PDF documents."
+          href="/pdf-tools/sign-pdf"
         />
 
         <CategoryCard
