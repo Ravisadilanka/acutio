@@ -1,4 +1,11 @@
 import CategoryCard from "@/components/CategoryCard";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "PDF Tools",
+  description:
+    "Free PDF tools including Merge PDF, Split PDF, Rotate PDF, JPG to PDF, PDF to JPG, and Sign PDF.",
+};
 
 export default function PDFToolsPage() {
   return (

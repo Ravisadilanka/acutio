@@ -5,8 +5,15 @@ import { PDFDocument } from "pdf-lib";
 import PdfFileCard from "@/components/PdfFileCard";
 import FileDropzone from "@/components/FileDropzone";
 import { toast } from "sonner";
+import { Metadata } from "next";
 
 type SplitMode = "all" | "ranges" | "extract";
+
+export const metadata: Metadata = {
+  title: "Split PDF Online Free",
+  description:
+    "Split PDF files into separate pages or custom page ranges. Fast and secure browser-based PDF splitter.",
+};
 
 export default function SplitPdfPage() {
   const [file, setFile] = useState<File | null>(null);

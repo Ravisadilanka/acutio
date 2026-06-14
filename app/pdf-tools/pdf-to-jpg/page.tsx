@@ -5,9 +5,16 @@ import { toast } from "sonner";
 import FileDropzone from "@/components/FileDropzone";
 import PdfFileCard from "@/components/PdfFileCard";
 import * as pdfjsLib from "pdfjs-dist";
+import { Metadata } from "next";
 
 pdfjsLib.GlobalWorkerOptions.workerSrc =
   "/pdf.worker.min.mjs";
+
+export const metadata: Metadata = {
+  title: "PDF to JPG Online Free",
+  description:
+    "Convert PDF pages into high-quality JPG images directly in your browser.",
+};
 
 export default function PdfToJpgPage() {
   const [file, setFile] =

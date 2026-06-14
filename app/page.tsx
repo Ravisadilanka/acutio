@@ -1,5 +1,12 @@
 import Hero from "@/components/Hero";
 import CategoryCard from "@/components/CategoryCard";
+import { Metadata } from "next/dist/lib/metadata/types/metadata-interface";
+
+export const metadata: Metadata = {
+  title: "Free Online Tools",
+  description:
+    "Free online tools for PDF editing, file conversion, productivity, and more. Fast, secure, and easy to use.",
+};
 
 export default function Home() {
   return (

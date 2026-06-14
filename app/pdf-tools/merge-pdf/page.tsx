@@ -7,11 +7,18 @@ import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import PdfFileCard from "@/components/PdfFileCard";
 import FileDropzone from "@/components/FileDropzone";
 import { toast } from "sonner";
+import { Metadata } from "next";
 
 interface PdfItem {
   file: File;
   pages: number;
 }
+
+export const metadata: Metadata = {
+  title: "Merge PDF Online Free",
+  description:
+    "Merge PDF files online for free. Combine multiple PDF documents into a single PDF directly in your browser.",
+};
 
 export default function MergePdfPage() {
   const [files, setFiles] = useState<PdfItem[]>([]);

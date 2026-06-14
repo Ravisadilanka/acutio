@@ -1,3 +1,10 @@
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "About Acutio",
+  description:
+    "Learn more about Acutio and our mission to provide free online tools.",
+};
 export default function AboutUsPage() {
   return (
     <main className="max-w-4xl mx-auto px-6 py-16">

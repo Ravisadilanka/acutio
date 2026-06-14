@@ -1,3 +1,11 @@
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Terms and Conditions",
+  description:
+    "Read the terms and conditions for using Acutio and its online tools.",
+};
+
 export default function TermsAndConditionsPage() {
   return (
     <main className="max-w-4xl mx-auto px-6 py-16">

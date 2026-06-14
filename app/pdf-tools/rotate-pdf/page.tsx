@@ -5,6 +5,13 @@ import { PDFDocument, degrees } from "pdf-lib";
 import PdfFileCard from "@/components/PdfFileCard";
 import FileDropzone from "@/components/FileDropzone";
 import { toast } from "sonner";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Rotate PDF Online Free",
+  description:
+    "Rotate PDF pages online. Change page orientation quickly and securely in your browser.",
+};
 
 export default function RotatePdfPage() {
   const [file, setFile] = useState<File | null>(null);

@@ -11,8 +11,15 @@ import PdfFileCard from "@/components/PdfFileCard";
 import PdfPreview from "@/components/PdfPreview";
 import SignatureToolbar from "@/components/SignatureToolbar";
 import type { SignaturePlacement } from "@/components/SignatureOverlay";
+import { Metadata } from "next";
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
+
+export const metadata: Metadata = {
+  title: "Sign PDF Online Free",
+  description:
+    "Draw or upload your signature and sign PDF documents online securely.",
+};
 
 export default function SignPdfPage() {
   const [file, setFile] = useState<File | null>(null);

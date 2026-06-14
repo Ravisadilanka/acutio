@@ -6,11 +6,19 @@ import FileDropzone from "@/components/FileDropzone";
 import Image from "next/image";
 import { Trash2 } from "lucide-react";
 import { toast } from "sonner";
+import { Metadata } from "next";
+
 
 interface ImageItem {
   file: File;
   preview: string;
 }
+
+export const metadata: Metadata = {
+  title: "JPG to PDF Online Free",
+  description:
+    "Convert JPG, PNG, and WEBP images into PDF documents online for free.",
+};
 
 export default function JpgToPdfPage() {
   const [images, setImages] = useState<ImageItem[]>([]);

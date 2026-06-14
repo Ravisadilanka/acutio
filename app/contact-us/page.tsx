@@ -1,3 +1,10 @@
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Contact Us",
+  description:
+    "Get in touch with the Acutio team for support, questions, and feedback.",
+};
 export default function ContactUsPage() {
   return (
     <main className="max-w-4xl mx-auto px-6 py-16">
