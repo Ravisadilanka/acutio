@@ -8,6 +8,7 @@ interface FileDropzoneProps {
   title?: string;
   subtitle?: string;
   accept?: Record<string, string[]>;
+  multiple?: boolean;
 }
 
 export default function FileDropzone({
@@ -15,15 +16,15 @@ export default function FileDropzone({
   title = "Select Files",
   subtitle = "Drag and drop files here",
   accept,
+  multiple = true,
 }: FileDropzoneProps) {
-  const { getRootProps, getInputProps } =
-    useDropzone({
-      accept,
-      multiple: true,
-      onDrop: (acceptedFiles) => {
-        onFilesAdded(acceptedFiles);
-      },
-    });
+  const { getRootProps, getInputProps } = useDropzone({
+    accept,
+    multiple,
+    onDrop: (acceptedFiles) => {
+      onFilesAdded(acceptedFiles);
+    },
+  });
 
   return (
     <div
@@ -44,13 +45,9 @@ export default function FileDropzone({
 
       <Upload className="w-12 h-12 mx-auto mb-4" />
 
-      <h2 className="text-2xl font-bold">
-        {title}
-      </h2>
+      <h2 className="text-2xl font-bold">{title}</h2>
 
-      <p className="text-gray-500 mt-2">
-        {subtitle}
-      </p>
+      <p className="text-gray-500 mt-2">{subtitle}</p>
     </div>
   );
 }
