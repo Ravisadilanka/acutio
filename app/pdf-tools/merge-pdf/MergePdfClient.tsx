@@ -114,7 +114,7 @@ export default function MergePdfPage() {
   return (
     <main className="max-w-6xl mx-auto px-6 py-16">
       <div className="text-center mb-10">
-        <h1 className="text-5xl font-bold mb-4">Merge PDF</h1>
+        <h1 className="text-3xl md:text-5xl font-bold mb-4">Merge PDF</h1>
 
         <p className="text-gray-500">
           Combine multiple PDF files into one document.

@@ -34,7 +34,7 @@ export default function FileDropzone({
         border-dashed
         border-gray-300
         rounded-3xl
-        p-16
+        p-8 md:p-16
         text-center
         cursor-pointer
         hover:border-black

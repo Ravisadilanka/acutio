@@ -10,13 +10,13 @@ export const metadata: Metadata = {
 export default function PDFToolsPage() {
   return (
     <main className="max-w-6xl mx-auto px-6 py-20">
-      <h1 className="text-5xl font-bold">PDF Tools</h1>
+      <h1 className="text-3xl md:text-5xl font-bold">PDF Tools</h1>
 
       <p className="mt-4 text-gray-600">
         Free PDF editing and conversion tools.
       </p>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
         <CategoryCard
           title="Merge PDF"
           description="Combine multiple PDF files into a single document."
@@ -40,7 +40,7 @@ export default function PDFToolsPage() {
           description="Rotate PDF pages to the desired orientation."
           href="/pdf-tools/rotate-pdf"
         />
-        
+
         <CategoryCard
           title="PDF to JPG"
           description="Convert PDF pages to high-quality JPG images."
@@ -52,7 +52,6 @@ export default function PDFToolsPage() {
           description="Convert JPG images to PDF documents."
           href="/pdf-tools/jpg-to-pdf"
         />
-
       </div>
     </main>
   );

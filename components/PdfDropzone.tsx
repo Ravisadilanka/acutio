@@ -26,7 +26,7 @@ export default function PdfDropzone({
       border-dashed
       border-gray-300
       rounded-3xl
-      p-16
+      p-8 md:p-16
       text-center
       cursor-pointer
       hover:border-black
@@ -37,13 +37,9 @@ export default function PdfDropzone({
 
       <Upload className="w-12 h-12 mx-auto mb-4" />
 
-      <h2 className="text-2xl font-bold">
-        Select PDF Files
-      </h2>
+      <h2 className="text-2xl font-bold">Select PDF Files</h2>
 
-      <p className="text-gray-500 mt-2">
-        Drag and drop PDFs here
-      </p>
+      <p className="text-gray-500 mt-2">Drag and drop PDFs here</p>
     </div>
   );
 }
