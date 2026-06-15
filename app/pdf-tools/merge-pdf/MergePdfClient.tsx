@@ -7,6 +7,7 @@ import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import PdfFileCard from "@/components/PdfFileCard";
 import FileDropzone from "@/components/FileDropzone";
 import { toast } from "sonner";
+import ToolSEO from "@/components/ToolSEO";
 
 interface PdfItem {
   file: File;
@@ -258,6 +259,37 @@ export default function MergePdfPage() {
           </div>
         </>
       )}
+
+      <ToolSEO
+        title="Merge PDF Online Free"
+        description="Combine multiple PDF files into a single PDF document directly in your browser. No uploads to external servers."
+        steps={[
+          "Upload PDF files",
+          "Arrange the file order",
+          "Click Merge PDF",
+          "Download your merged document",
+        ]}
+        features={[
+          "Secure browser-based processing",
+          "Unlimited PDF merging",
+          "No registration required",
+          "Fast PDF combination",
+        ]}
+        faqs={[
+          {
+            question: "How do I merge PDF files?",
+            answer: "Upload your PDFs, arrange them, and click Merge PDF.",
+          },
+          {
+            question: "Is this PDF merger free?",
+            answer: "Yes, Acutio PDF tools are free to use.",
+          },
+          {
+            question: "Are my files secure?",
+            answer: "All processing happens in your browser.",
+          },
+        ]}
+      />
     </main>
   );
 }

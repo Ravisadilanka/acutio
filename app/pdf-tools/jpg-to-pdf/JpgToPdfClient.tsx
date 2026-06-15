@@ -12,6 +12,7 @@ import FileDropzone from "@/components/FileDropzone";
 import Image from "next/image";
 import { Trash2 } from "lucide-react";
 import { toast } from "sonner";
+import ToolSEO from "@/components/ToolSEO";
 
 interface ImageItem {
   file: File;
@@ -292,6 +293,37 @@ export default function JpgToPdfPage() {
           </div>
         </>
       )}
+      <ToolSEO
+        title="JPG to PDF Converter"
+        description="Convert JPG, PNG, WEBP, HEIC, GIF, BMP, and TIFF images into PDF documents. Arrange images and create professional PDFs online."
+        steps={[
+          "Upload images",
+          "Reorder images if needed",
+          "Click Convert to PDF",
+          "Download your PDF document",
+        ]}
+        features={[
+          "Supports multiple image formats",
+          "Drag and reorder pages",
+          "Fast conversion",
+          "No uploads to servers",
+        ]}
+        faqs={[
+          {
+            question: "Can I convert multiple images into one PDF?",
+            answer:
+              "Yes. Upload multiple images and combine them into a single PDF.",
+          },
+          {
+            question: "Does it support HEIC images?",
+            answer: "Yes. HEIC and HEIF images are supported.",
+          },
+          {
+            question: "Can I change image order?",
+            answer: "Yes. Drag and drop images before converting.",
+          },
+        ]}
+      />
     </main>
   );
 }
