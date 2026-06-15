@@ -12,7 +12,6 @@ import FileDropzone from "@/components/FileDropzone";
 import Image from "next/image";
 import { Trash2 } from "lucide-react";
 import { toast } from "sonner";
-import heic2any from "heic2any";
 
 interface ImageItem {
   file: File;
@@ -68,6 +67,8 @@ export default function JpgToPdfPage() {
         let embeddedImage;
 
         if (image.type === "image/heic" || image.type === "image/heif") {
+          const { default: heic2any } = await import("heic2any");
+
           const converted = await heic2any({
             blob: image,
             toType: "image/png",
