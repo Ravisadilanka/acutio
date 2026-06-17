@@ -1,6 +1,12 @@
 import type { Metadata } from "next";
 import CategoryCard from "@/components/CategoryCard";
 
+import {
+  Calculator,
+  TrendingUp,
+  Percent,
+} from "lucide-react";
+
 export const metadata: Metadata = {
   title: "Free Online Calculators",
   description:
@@ -11,6 +17,7 @@ export const metadata: Metadata = {
     "free calculators",
     "business calculators",
     "finance calculators",
+    "ebay calculator",
     "ebay fee calculator",
     "profit calculator",
     "ROI calculator",
@@ -42,15 +49,36 @@ export default function CalculatorsPage() {
       </h1>
 
       <p className="mt-4 text-gray-600">
-        Free online calculators for fees,
-        finance, business and everyday use.
+        Free online calculators for
+        profit, ROI, fees, finance,
+        business and everyday use.
       </p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
         <CategoryCard
-          title="eBay Fee Calculator"
-          description="Calculate eBay fees, profit and margins."
+          title="eBay Profit Calculator"
+          description="Calculate selling price, profit, ROI and margins after eBay fees."
           href="/calculators/ebay-fee-calculator"
+          icon={<TrendingUp size={32} />}
+          color="bg-emerald-100"
+        />
+
+        {/* Future calculators */}
+
+        <CategoryCard
+          title="ROI Calculator"
+          description="Calculate return on investment and profitability."
+          href="#"
+          icon={<Percent size={32} />}
+          color="bg-blue-100"
+        />
+
+        <CategoryCard
+          title="Business Calculators"
+          description="Finance, profit and business planning calculators."
+          href="#"
+          icon={<Calculator size={32} />}
+          color="bg-purple-100"
         />
       </div>
     </main>

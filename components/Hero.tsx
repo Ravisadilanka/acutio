@@ -37,7 +37,7 @@ export default function Hero() {
           generate files and simplify your workflow.
         </p>
 
-        <div className="mt-10 max-w-xl mx-auto">
+        {/* <div className="mt-10 max-w-xl mx-auto">
           <input
             type="text"
             value={search}
@@ -64,7 +64,7 @@ export default function Hero() {
               )}
             </div>
           )}
-        </div>
+        </div> */}
 
       </div>
     </section>
