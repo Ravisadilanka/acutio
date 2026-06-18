@@ -13,17 +13,7 @@ declare global {
 
 export default function SpeechToTextPage() {
   const [text, setText] = useState("");
-  const [language, setLanguage] = useState(() => {
-  if (typeof window === "undefined") {
-    return "en-US";
-  }
-
-  try {
-    return localStorage.getItem("stt-language") || "en-US";
-  } catch {
-    return "en-US";
-  }
-});
+  const [language, setLanguage] = useState("en-US");
   const [recording, setRecording] = useState(false);
   const [supported, setSupported] = useState(true);
 
@@ -34,6 +24,17 @@ export default function SpeechToTextPage() {
   useEffect(() => {
     languageRef.current = language;
   }, [language]);
+
+    useEffect(() => {
+  const saved =
+    localStorage.getItem(
+      "stt-language"
+    );
+
+  if (saved) {
+    setLanguage(saved);
+  }
+}, []);
 
   useEffect(() => {
     if (typeof window === "undefined") {
@@ -47,6 +48,7 @@ export default function SpeechToTextPage() {
       setSupported(false);
       return;
     }
+
 
     const recognition = new SpeechRecognitionAPI();
 
@@ -190,13 +192,16 @@ export default function SpeechToTextPage() {
         <select
           value={language}
           onChange={(e) => {
-            const newLang = e.target.value;
-            setLanguage(newLang);
+  const newLang =
+    e.target.value;
 
-            try {
-              localStorage.setItem("stt-language", newLang);
-            } catch {}
-          }}
+  setLanguage(newLang);
+
+  localStorage.setItem(
+    "stt-language",
+    newLang
+  );
+}}
           className="border rounded-xl px-4 py-3"
         >
           {languages
