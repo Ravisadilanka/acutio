@@ -13,11 +13,27 @@ declare global {
 
 export default function SpeechToTextPage() {
   const [text, setText] = useState("");
-  const [language, setLanguage] = useState("en-US");
+  const [language, setLanguage] = useState(() => {
+  if (typeof window === "undefined") {
+    return "en-US";
+  }
+
+  try {
+    return localStorage.getItem("stt-language") || "en-US";
+  } catch {
+    return "en-US";
+  }
+});
   const [recording, setRecording] = useState(false);
   const [supported, setSupported] = useState(true);
 
   const recognitionRef = useRef<any>(null);
+  const shouldKeepRecordingRef = useRef(false);
+  const languageRef = useRef(language);
+
+  useEffect(() => {
+    languageRef.current = language;
+  }, [language]);
 
   useEffect(() => {
     if (typeof window === "undefined") {
@@ -34,29 +50,68 @@ export default function SpeechToTextPage() {
 
     const recognition = new SpeechRecognitionAPI();
 
-    recognition.continuous = false;
+    // continuous = true so it doesn't stop after a single phrase/pause
+    recognition.continuous = true;
 
-    recognition.interimResults = false;
+    // interimResults = true forces the engine to report speech more
+    // eagerly instead of silently batching/discarding it while deciding
+    // on a final result. We still only commit isFinal results to text.
+    recognition.interimResults = true;
 
     recognition.onresult = (event: any) => {
-      let transcript = "";
+      let finalTranscript = "";
 
-      for (let i = 0; i < event.results.length; i++) {
-        transcript += event.results[i][0].transcript;
+      // only read NEW results (resultIndex onward) since results
+      // accumulate across the whole session in continuous mode
+      for (let i = event.resultIndex; i < event.results.length; i++) {
+        if (event.results[i].isFinal) {
+          finalTranscript += event.results[i][0].transcript;
+        }
       }
 
-      setText((prev) => (prev.trim() ? `${prev} ${transcript}` : transcript));
+      if (finalTranscript.trim()) {
+        setText((prev) =>
+          prev.trim() ? `${prev} ${finalTranscript}` : finalTranscript,
+        );
+      }
     };
 
     recognition.onend = () => {
-      setRecording(false);
+      // Chrome/Edge end the session on their own after silence or a time
+      // limit even in continuous mode. If the user hasn't pressed Stop,
+      // restart automatically instead of just dying silently.
+      if (shouldKeepRecordingRef.current) {
+        try {
+          recognition.lang = languageRef.current;
+          recognition.start();
+        } catch {
+          setRecording(false);
+        }
+      } else {
+        setRecording(false);
+      }
     };
 
-    recognition.onerror = () => {
+    recognition.onerror = (event: any) => {
+      // "no-speech" and "audio-capture" are recoverable - onend fires
+      // right after this and restart() above handles it.
+      if (event.error === "no-speech" || event.error === "audio-capture") {
+        return;
+      }
+
+      // Anything else (not-allowed, network, aborted, etc.) - stop for real
+      shouldKeepRecordingRef.current = false;
       setRecording(false);
     };
 
     recognitionRef.current = recognition;
+
+    return () => {
+      shouldKeepRecordingRef.current = false;
+      try {
+        recognition.stop();
+      } catch {}
+    };
   }, []);
 
   const startRecording = () => {
@@ -65,13 +120,18 @@ export default function SpeechToTextPage() {
     }
 
     recognitionRef.current.lang = language;
+    shouldKeepRecordingRef.current = true;
 
-    recognitionRef.current.start();
-
-    setRecording(true);
+    try {
+      recognitionRef.current.start();
+      setRecording(true);
+    } catch {
+      // start() throws if already started; ignore
+    }
   };
 
   const stopRecording = () => {
+    shouldKeepRecordingRef.current = false;
     recognitionRef.current?.stop();
 
     setRecording(false);
@@ -129,7 +189,14 @@ export default function SpeechToTextPage() {
 
         <select
           value={language}
-          onChange={(e) => setLanguage(e.target.value)}
+          onChange={(e) => {
+            const newLang = e.target.value;
+            setLanguage(newLang);
+
+            try {
+              localStorage.setItem("stt-language", newLang);
+            } catch {}
+          }}
           className="border rounded-xl px-4 py-3"
         >
           {languages
@@ -144,12 +211,16 @@ export default function SpeechToTextPage() {
 
       <div className="flex flex-wrap gap-4 mt-8">
         <button
-          onClick={startRecording}
-          disabled={recording}
-          className="bg-black text-white px-6 py-3 rounded-xl"
-        >
-          Start Recording
-        </button>
+  onClick={startRecording}
+  disabled={recording}
+  className={
+    recording
+      ? "bg-red-600 text-white px-6 py-3 rounded-xl"
+      : "bg-black text-white px-6 py-3 rounded-xl"
+  }
+>
+  {recording ? "Recording..." : "Start Recording"}
+</button>
 
         <button
           onClick={stopRecording}
