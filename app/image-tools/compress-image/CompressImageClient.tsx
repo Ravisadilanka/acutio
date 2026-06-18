@@ -101,7 +101,7 @@ export default function CompressImagePage() {
   return (
     <main className="max-w-6xl mx-auto px-6 py-16">
       <div className="text-center">
-        <h1 className="text-5xl font-bold">Compress Image</h1>
+        <h1 className="text-3xl md:text-5xl font-bold mb-8">Compress Image</h1>
 
         <p className="mt-4 text-gray-500">
           Compress JPG, PNG, WEBP, HEIC, GIF, BMP, TIFF and AVIF images.

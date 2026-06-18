@@ -19,9 +19,7 @@ export const metadata: Metadata = {
 export default function PDFToolsPage() {
   return (
     <main className="max-w-6xl mx-auto px-6 py-20">
-      <h1 className="text-3xl md:text-5xl font-bold">
-        PDF Tools
-      </h1>
+      <h1 className="text-3xl md:text-5xl font-bold mb-8">PDF Tools</h1>
 
       <p className="mt-4 text-gray-600">
         Free PDF editing, conversion and document management tools.

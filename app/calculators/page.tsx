@@ -1,11 +1,7 @@
 import type { Metadata } from "next";
 import CategoryCard from "@/components/CategoryCard";
 
-import {
-  Calculator,
-  TrendingUp,
-  Percent,
-} from "lucide-react";
+import { Calculator, TrendingUp, Percent } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Free Online Calculators",
@@ -44,14 +40,11 @@ export const metadata: Metadata = {
 export default function CalculatorsPage() {
   return (
     <main className="max-w-6xl mx-auto px-6 py-20">
-      <h1 className="text-3xl md:text-5xl font-bold">
-        Calculators
-      </h1>
+      <h1 className="text-3xl md:text-5xl font-bold mb-8">Calculators</h1>
 
       <p className="mt-4 text-gray-600">
-        Free online calculators for
-        profit, ROI, fees, finance,
-        business and everyday use.
+        Free online calculators for profit, ROI, fees, finance, business and
+        everyday use.
       </p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">

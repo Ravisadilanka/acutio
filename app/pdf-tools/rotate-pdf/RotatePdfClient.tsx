@@ -77,7 +77,7 @@ export default function RotatePdfPage() {
   return (
     <main className="max-w-5xl mx-auto px-6 py-16">
       <div className="text-center">
-        <h1 className="text-3xl md:text-5xl font-bold">Rotate PDF</h1>
+        <h1 className="text-3xl md:text-5xl font-bold mb-8">Rotate PDF</h1>
 
         <p className="mt-4 text-gray-500">Rotate pages in a PDF file.</p>
       </div>

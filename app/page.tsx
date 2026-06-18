@@ -7,6 +7,7 @@ import {
   Calculator,
   RefreshCw,
   Sparkles,
+  Mic,
 } from "lucide-react";
 
 import type { Metadata } from "next";
@@ -23,9 +24,7 @@ export default function Home() {
       <Hero />
 
       <section className="max-w-6xl mx-auto px-6 pb-20">
-        <h2 className="text-3xl font-bold mb-10">
-          Categories
-        </h2>
+        <h2 className="text-3xl font-bold mb-10">Categories</h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <CategoryCard
@@ -66,6 +65,14 @@ export default function Home() {
             href="/ai-tools"
             icon={<Sparkles size={32} />}
             color="bg-pink-100"
+          />
+
+          <CategoryCard
+            title="Audio Tools"
+            description="Speech to text, text to speech, audio conversion and voice tools."
+            href="/audio-tools"
+            icon={<Mic size={32} />}
+            color="bg-cyan-100"
           />
         </div>
       </section>

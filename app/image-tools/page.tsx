@@ -1,12 +1,7 @@
 import type { Metadata } from "next";
 import CategoryCard from "@/components/CategoryCard";
 
-import {
-  ImageIcon,
-  Minimize2,
-  RefreshCw,
-  Crop,
-} from "lucide-react";
+import { ImageIcon, Minimize2, RefreshCw, Crop } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Image Tools",
@@ -17,9 +12,7 @@ export const metadata: Metadata = {
 export default function ImageToolsPage() {
   return (
     <main className="max-w-6xl mx-auto px-6 py-20">
-      <h1 className="text-3xl md:text-5xl font-bold">
-        Image Tools
-      </h1>
+      <h1 className="text-3xl md:text-5xl font-bold mb-8">Image Tools</h1>
 
       <p className="mt-4 text-gray-600">
         Free image editing, conversion and optimization tools.

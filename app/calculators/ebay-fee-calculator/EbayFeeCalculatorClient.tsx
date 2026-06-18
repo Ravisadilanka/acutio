@@ -32,52 +32,37 @@ const defaultValues: CalculatorValues = {
 };
 
 export default function EbayFeeCalculatorPage() {
-  const [values, setValues] =
-    useState<CalculatorValues>(() => {
-      if (typeof window === "undefined") {
-        return defaultValues;
-      }
-
-      try {
-        const saved =
-          localStorage.getItem(
-            STORAGE_KEY
-          );
-
-        if (saved) {
-          return JSON.parse(saved);
-        }
-      } catch (error) {
-        console.error(error);
-      }
-
+  const [values, setValues] = useState<CalculatorValues>(() => {
+    if (typeof window === "undefined") {
       return defaultValues;
-    });
+    }
+
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+
+      if (saved) {
+        return JSON.parse(saved);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+
+    return defaultValues;
+  });
 
   useEffect(() => {
     try {
-      localStorage.setItem(
-        STORAGE_KEY,
-        JSON.stringify(values)
-      );
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(values));
     } catch (error) {
       console.error(error);
     }
   }, [values]);
 
-  const results = useMemo(
-    () =>
-      calculateResults(
-        values
-      ),
-    [values]
-  );
+  const results = useMemo(() => calculateResults(values), [values]);
 
-  const updateValue = <
-    K extends keyof CalculatorValues,
-  >(
+  const updateValue = <K extends keyof CalculatorValues>(
     key: K,
-    value: CalculatorValues[K]
+    value: CalculatorValues[K],
   ) => {
     setValues((prev) => ({
       ...prev,
@@ -87,9 +72,7 @@ export default function EbayFeeCalculatorPage() {
 
   const reset = () => {
     try {
-      localStorage.removeItem(
-        STORAGE_KEY
-      );
+      localStorage.removeItem(STORAGE_KEY);
     } catch (error) {
       console.error(error);
     }
@@ -100,15 +83,13 @@ export default function EbayFeeCalculatorPage() {
   return (
     <main className="max-w-6xl mx-auto px-6 py-16">
       <div className="text-center">
-        <h1 className="text-3xl md:text-5xl font-bold mb-4">
+        <h1 className="text-3xl md:text-5xl font-bold mb-8 mb-4">
           eBay Profit Calculator
         </h1>
 
         <p className="mt-4 text-gray-500">
-          Calculate the selling
-          price required to reach
-          your target profit,
-          ROI or margin.
+          Calculate the selling price required to reach your target profit, ROI
+          or margin.
         </p>
       </div>
 
@@ -128,16 +109,9 @@ export default function EbayFeeCalculatorPage() {
       </div>
 
       <div className="grid lg:grid-cols-2 gap-8 mt-10">
-        <CalculatorForm
-          values={values}
-          onChange={
-            updateValue
-          }
-        />
+        <CalculatorForm values={values} onChange={updateValue} />
 
-        <CalculatorResults
-          results={results}
-        />
+        <CalculatorResults results={results} />
       </div>
 
       <ToolSEO
@@ -158,7 +132,6 @@ export default function EbayFeeCalculatorPage() {
         ]}
         faqs={faqs}
       />
-
     </main>
   );
 }
