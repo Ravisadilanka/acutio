@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import CategoryCard from "@/components/CategoryCard";
 
-import { Calculator, TrendingUp, Percent } from "lucide-react";
+import { Calculator, TrendingUp, Percent, Keyboard } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Free Online Calculators",
@@ -72,6 +72,14 @@ export default function CalculatorsPage() {
           href="#"
           icon={<Calculator size={32} />}
           color="bg-purple-100"
+        />
+
+        <CategoryCard
+          title="Typing Speed Test"
+          description="Measure typing speed, WPM, accuracy and keyboard performance."
+          href="/calculators/typing-speed-test"
+          icon={<Keyboard size={32} />}
+          color="bg-blue-100"
         />
       </div>
     </main>
