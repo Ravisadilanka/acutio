@@ -1,10 +1,93 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "About Acutio",
+  title: "About Acutio | Free Online Tools Platform",
+
   description:
-    "Learn more about Acutio and our mission to provide free online tools.",
+    "Learn more about Acutio, our mission, and our growing collection of free online tools for PDF editing, image optimization, calculators, converters, productivity, and everyday tasks.",
+
+  keywords: [
+    "about acutio",
+    "acutio",
+    "free online tools",
+    "pdf tools",
+    "image tools",
+    "online calculators",
+    "file converters",
+    "productivity tools",
+    "browser tools",
+    "free utilities",
+  ],
+
+  authors: [
+    {
+      name: "Acutio",
+    },
+  ],
+
+  creator: "Acutio",
+
+  publisher: "Acutio",
+
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+
+  alternates: {
+    canonical:
+      "https://acutio.com/about-us",
+  },
+
+  openGraph: {
+    title:
+      "About Acutio | Free Online Tools Platform",
+
+    description:
+      "Discover Acutio's mission to provide free, fast, and privacy-friendly online tools for everyone.",
+
+    url: "https://acutio.com/about-us",
+
+    siteName: "Acutio",
+
+    type: "website",
+  },
+
+  twitter: {
+    card: "summary_large_image",
+
+    title:
+      "About Acutio | Free Online Tools Platform",
+
+    description:
+      "Learn more about Acutio and our mission to build free online tools for everyday tasks.",
+  },
 };
+
+<script
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{
+    __html: JSON.stringify({
+      "@context":
+        "https://schema.org",
+      "@type":
+        "Organization",
+      name: "Acutio",
+      url: "https://acutio.com",
+      description:
+        "Acutio provides free online tools for PDF editing, image optimization, calculators, converters and productivity.",
+    }),
+  }}
+/>
+
+
 export default function AboutUsPage() {
   return (
     <main className="max-w-4xl mx-auto px-6 py-16">

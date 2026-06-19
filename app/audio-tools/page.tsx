@@ -4,9 +4,58 @@ import CategoryCard from "@/components/CategoryCard";
 import { Mic, Volume2, AudioLines, Scissors } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Audio Tools",
+  title: "Audio Tools | Free Online Audio Utilities",
+
   description:
-    "Free audio tools including speech to text, text to speech, audio conversion, voice recording and audio editing. Fast, secure and easy to use.",
+    "Free audio tools including speech to text, text to speech, audio conversion, voice recording, audio editing and more. Fast, secure and easy to use.",
+
+  keywords: [
+    "audio tools",
+    "speech to text",
+    "text to speech",
+    "audio converter",
+    "voice recorder",
+    "audio editor",
+    "mp3 converter",
+    "wav converter",
+    "free audio tools",
+    "online audio tools",
+  ],
+
+  alternates: {
+    canonical:
+      "https://acutio.com/audio-tools",
+  },
+
+  robots: {
+    index: true,
+    follow: true,
+  },
+
+  openGraph: {
+    title:
+      "Audio Tools | Free Online Audio Utilities",
+
+    description:
+      "Convert, record, edit and process audio files online with free audio tools from Acutio.",
+
+    url:
+      "https://acutio.com/audio-tools",
+
+    siteName: "Acutio",
+
+    type: "website",
+  },
+
+  twitter: {
+    card: "summary",
+
+    title:
+      "Audio Tools | Free Online Audio Utilities",
+
+    description:
+      "Free audio tools including speech to text, text to speech, audio conversion and more.",
+  },
 };
 
 export default function AudioToolsPage() {
