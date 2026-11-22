@@ -48,7 +48,7 @@ export default function PdfPreview({
             return (
               <div
                 key={page.pageNumber}
-                className="overflow-hidden rounded-2xl border bg-white shadow-sm"
+                className="overflow-hidden rounded-2xl border bg-surface shadow-sm"
               >
                 <div className="border-b px-4 py-3 text-sm font-medium text-gray-600">
                   Page {page.pageNumber}

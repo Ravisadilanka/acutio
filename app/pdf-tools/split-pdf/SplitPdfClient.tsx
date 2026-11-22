@@ -5,7 +5,6 @@ import { PDFDocument } from "pdf-lib";
 import PdfFileCard from "@/components/PdfFileCard";
 import FileDropzone from "@/components/FileDropzone";
 import { toast } from "sonner";
-import ToolSEO from "@/components/ToolSEO";
 
 type SplitMode = "all" | "ranges" | "extract";
 
@@ -142,14 +141,7 @@ export default function SplitPdfPage() {
   };
 
   return (
-    <main className="max-w-5xl mx-auto px-6 py-16">
-      <div className="text-center">
-        <h1 className="text-3xl md:text-5xl font-bold mb-8">Split PDF</h1>
-
-        <p className="mt-4 text-gray-500">
-          Split PDF pages exactly how you want.
-        </p>
-      </div>
+    <div>
 
       <div className="mt-10">
         <FileDropzone
@@ -163,7 +155,7 @@ export default function SplitPdfPage() {
       </div>
 
       {file && (
-        <div className="mt-8 bg-white border rounded-2xl p-6">
+        <div className="mt-8 bg-surface border rounded-2xl p-6">
           <PdfFileCard
             file={file}
             pages={pageCount}
@@ -245,7 +237,7 @@ export default function SplitPdfPage() {
               <div className="w-full bg-gray-200 rounded-full h-3">
                 <div
                   className="
-                    bg-black
+                    bg-brand
                     h-3
                     rounded-full
                   "
@@ -262,7 +254,7 @@ export default function SplitPdfPage() {
             disabled={loading}
             className="
               mt-6
-              bg-black
+              bg-brand
               text-white
               px-8
               py-4
@@ -273,38 +265,6 @@ export default function SplitPdfPage() {
           </button>
         </div>
       )}
-      <ToolSEO
-        title="Split PDF Online Free"
-        description="Extract pages or split large PDF files into smaller documents. Separate individual pages or create custom page ranges in seconds."
-        steps={[
-          "Upload a PDF file",
-          "Choose pages or ranges",
-          "Click Split PDF",
-          "Download the new PDF files",
-        ]}
-        features={[
-          "Split by page range",
-          "Extract specific pages",
-          "Fast processing",
-          "Works in your browser",
-        ]}
-        faqs={[
-          {
-            question: "How do I split a PDF?",
-            answer:
-              "Upload your PDF, choose the pages you want, and click Split PDF.",
-          },
-          {
-            question: "Can I extract a single page?",
-            answer: "Yes. You can save individual pages as separate PDF files.",
-          },
-          {
-            question: "Is there a file size limit?",
-            answer:
-              "Large PDFs can be processed depending on your device memory.",
-          },
-        ]}
-      />
-    </main>
+    </div>
   );
 }

@@ -4,24 +4,17 @@ import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 
 export default function ThemeToggle() {
-  const { theme, setTheme } = useTheme();
+  const { resolvedTheme, setTheme } = useTheme();
 
   return (
     <button
-      onClick={() =>
-        setTheme(
-          theme === "dark"
-            ? "light"
-            : "dark"
-        )
-      }
-      className="p-2 rounded-lg border"
+      onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
+      className="rounded-xl p-2.5 text-gray-600 transition hover:bg-gray-100 hover:text-gray-900"
+      aria-label="Toggle dark mode"
     >
-      {theme === "dark" ? (
-        <Sun size={18} />
-      ) : (
-        <Moon size={18} />
-      )}
+      {/* Both icons rendered; CSS picks one to avoid a hydration mismatch. */}
+      <Sun className="hidden h-5 w-5 dark:block" />
+      <Moon className="h-5 w-5 dark:hidden" />
     </button>
   );
 }

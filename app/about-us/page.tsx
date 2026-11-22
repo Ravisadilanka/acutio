@@ -43,7 +43,7 @@ export const metadata: Metadata = {
 
   alternates: {
     canonical:
-      "https://acutio.com/about-us",
+      "https://acutio.com/about-us/",
   },
 
   openGraph: {
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     description:
       "Discover Acutio's mission to provide free, fast, and privacy-friendly online tools for everyone.",
 
-    url: "https://acutio.com/about-us",
+    url: "https://acutio.com/about-us/",
 
     siteName: "Acutio",
 

@@ -12,7 +12,6 @@ import FileDropzone from "@/components/FileDropzone";
 import Image from "next/image";
 import { Trash2 } from "lucide-react";
 import { toast } from "sonner";
-import ToolSEO from "@/components/ToolSEO";
 
 interface ImageItem {
   file: File;
@@ -172,14 +171,7 @@ export default function JpgToPdfPage() {
   };
 
   return (
-    <main className="max-w-6xl mx-auto px-6 py-16">
-      <div className="text-center">
-        <h1 className="text-3xl md:text-5xl font-bold mb-8">JPG to PDF</h1>
-
-        <p className="mt-4 text-gray-500">
-          Convert JPG, PNG and WEBP images into a PDF document.
-        </p>
-      </div>
+    <div>
 
       <div className="mt-10">
         <FileDropzone
@@ -220,7 +212,7 @@ export default function JpgToPdfPage() {
                           ref={provided.innerRef}
                           {...provided.draggableProps}
                           {...provided.dragHandleProps}
-                          className="border rounded-2xl p-4 bg-white"
+                          className="border rounded-2xl p-4 bg-surface"
                         >
                           <Image
                             src={image.preview}
@@ -266,7 +258,7 @@ export default function JpgToPdfPage() {
 
               <div className="w-full bg-gray-200 rounded-full h-3">
                 <div
-                  className="bg-black h-3 rounded-full"
+                  className="bg-brand h-3 rounded-full"
                   style={{
                     width: `${progress}%`,
                   }}
@@ -280,7 +272,7 @@ export default function JpgToPdfPage() {
               onClick={convertToPdf}
               disabled={loading}
               className="
-                bg-black
+                bg-brand
                 text-white
                 px-10
                 py-4
@@ -293,37 +285,6 @@ export default function JpgToPdfPage() {
           </div>
         </>
       )}
-      <ToolSEO
-        title="JPG to PDF Converter"
-        description="Convert JPG, PNG, WEBP, HEIC, GIF, BMP, and TIFF images into PDF documents. Arrange images and create professional PDFs online."
-        steps={[
-          "Upload images",
-          "Reorder images if needed",
-          "Click Convert to PDF",
-          "Download your PDF document",
-        ]}
-        features={[
-          "Supports multiple image formats",
-          "Drag and reorder pages",
-          "Fast conversion",
-          "No uploads to servers",
-        ]}
-        faqs={[
-          {
-            question: "Can I convert multiple images into one PDF?",
-            answer:
-              "Yes. Upload multiple images and combine them into a single PDF.",
-          },
-          {
-            question: "Does it support HEIC images?",
-            answer: "Yes. HEIC and HEIF images are supported.",
-          },
-          {
-            question: "Can I change image order?",
-            answer: "Yes. Drag and drop images before converting.",
-          },
-        ]}
-      />
-    </main>
+    </div>
   );
 }

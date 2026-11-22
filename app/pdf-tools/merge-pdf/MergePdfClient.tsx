@@ -7,7 +7,6 @@ import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import PdfFileCard from "@/components/PdfFileCard";
 import FileDropzone from "@/components/FileDropzone";
 import { toast } from "sonner";
-import ToolSEO from "@/components/ToolSEO";
 
 interface PdfItem {
   file: File;
@@ -112,14 +111,7 @@ export default function MergePdfPage() {
   };
 
   return (
-    <main className="max-w-6xl mx-auto px-6 py-16">
-      <div className="text-center mb-10">
-        <h1 className="text-3xl md:text-5xl font-bold mb-4">Merge PDF</h1>
-
-        <p className="text-gray-500">
-          Combine multiple PDF files into one document.
-        </p>
-      </div>
+    <div>
 
       <FileDropzone
         onFilesAdded={addFiles}
@@ -202,7 +194,7 @@ export default function MergePdfPage() {
               <div className="w-full bg-gray-200 rounded-full h-3">
                 <div
                   className="
-                    bg-black
+                    bg-brand
                     h-3
                     rounded-full
                     transition-all
@@ -244,7 +236,7 @@ export default function MergePdfPage() {
               onClick={mergePdfs}
               disabled={loading}
               className="
-                bg-black
+                bg-brand
                 text-white
                 px-10
                 py-4
@@ -260,36 +252,6 @@ export default function MergePdfPage() {
         </>
       )}
 
-      <ToolSEO
-        title="Merge PDF Online Free"
-        description="Combine multiple PDF files into a single PDF document directly in your browser. No uploads to external servers."
-        steps={[
-          "Upload PDF files",
-          "Arrange the file order",
-          "Click Merge PDF",
-          "Download your merged document",
-        ]}
-        features={[
-          "Secure browser-based processing",
-          "Unlimited PDF merging",
-          "No registration required",
-          "Fast PDF combination",
-        ]}
-        faqs={[
-          {
-            question: "How do I merge PDF files?",
-            answer: "Upload your PDFs, arrange them, and click Merge PDF.",
-          },
-          {
-            question: "Is this PDF merger free?",
-            answer: "Yes, Acutio PDF tools are free to use.",
-          },
-          {
-            question: "Are my files secure?",
-            answer: "All processing happens in your browser.",
-          },
-        ]}
-      />
-    </main>
+    </div>
   );
 }

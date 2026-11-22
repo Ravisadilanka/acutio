@@ -1,12 +1,13 @@
-import { Metadata } from "next";
+import ToolShell from "@/components/tool/ToolShell";
+import { toolMetadata } from "@/lib/seo";
 import RotatePdfClient from "./RotatePdfClient";
 
-export const metadata: Metadata = {
-  title: "Rotate PDF Online Free",
-  description:
-    "Rotate PDF pages online. Change page orientation quickly and securely in your browser.",
-};
+export const metadata = toolMetadata("rotate-pdf");
 
-export default function RotatePdfPage() {
-  return <RotatePdfClient />;
+export default function Page() {
+  return (
+    <ToolShell slug="rotate-pdf">
+      <RotatePdfClient />
+    </ToolShell>
+  );
 }

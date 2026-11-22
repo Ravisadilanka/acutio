@@ -15,7 +15,7 @@ export default function ImageCard({
   onRemove,
 }: ImageCardProps) {
   return (
-    <div className="border rounded-2xl p-4 bg-white shadow-sm">
+    <div className="border rounded-2xl p-4 bg-surface shadow-sm">
       <div className="flex items-center gap-4">
         <GripVertical className="w-5 h-5 text-gray-400" />
 

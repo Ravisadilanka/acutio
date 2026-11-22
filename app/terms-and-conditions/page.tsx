@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/terms-and-conditions/" },
   title: "Terms and Conditions",
   description:
     "Read the terms and conditions for using Acutio and its online tools.",

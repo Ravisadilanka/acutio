@@ -1,12 +1,13 @@
-import { Metadata } from "next";
+import ToolShell from "@/components/tool/ToolShell";
+import { toolMetadata } from "@/lib/seo";
 import SignPdfClient from "./SignPdfClient";
 
-export const metadata: Metadata = {
-  title: "Sign PDF Online Free",
-  description:
-    "Draw or upload your signature and sign PDF documents online securely.",
-};
+export const metadata = toolMetadata("sign-pdf");
 
-export default function SignPdfPage() {
-  return <SignPdfClient />;
+export default function Page() {
+  return (
+    <ToolShell slug="sign-pdf">
+      <SignPdfClient />
+    </ToolShell>
+  );
 }

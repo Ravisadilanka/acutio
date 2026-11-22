@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/privacy-policy/" },
   title: "Privacy Policy",
   description:
     "Read the Acutio Privacy Policy and learn how we protect your information.",
@@ -40,15 +41,33 @@ export default function PrivacyPolicyPage() {
         <section>
           <h2 className="text-2xl font-semibold mb-3">2. File Processing</h2>
 
-          <p>Many Acutio tools allow users to upload files for processing.</p>
+          <p>
+            Acutio tools run entirely inside your web browser. Files, text and
+            recordings you use with our tools are processed on your own device
+            and are never uploaded to or stored on Acutio servers.
+          </p>
 
           <ul className="list-disc pl-6 mt-3 space-y-2">
+            <li>We never receive, see, store, sell or share the files or text you process.</li>
+            <li>Results exist only in your browser until you download them or close the tab.</li>
             <li>
-              Uploaded files are used solely to perform the requested operation.
+              Some tools (such as the online notepad, favourites and recently
+              used tools) save preferences in your browser&apos;s local storage on
+              your own device. You can clear this at any time in your browser
+              settings.
             </li>
-            <li>We do not sell, rent, or share uploaded files.</li>
-            <li>We do not use uploaded content for advertising purposes.</li>
-            <li>Files may be automatically removed after processing.</li>
+            <li>
+              The Speech to Text tool uses your browser&apos;s built-in speech
+              recognition. Some browsers (for example Google Chrome) send audio
+              to their own provider to recognise speech; this is handled by
+              your browser, not by Acutio.
+            </li>
+            <li>
+              The Currency Converter downloads a public table of exchange rates
+              from ExchangeRate-API (open.er-api.com). Like any website request,
+              that service can see your IP address, but the amounts you convert
+              are calculated on your device and never sent.
+            </li>
           </ul>
         </section>
 
@@ -70,8 +89,9 @@ export default function PrivacyPolicyPage() {
           <h2 className="text-2xl font-semibold mb-3">4. Analytics</h2>
 
           <p>
-            We may use analytics services to better understand how visitors
-            interact with our website.
+            We use Google Analytics (with IP anonymisation) to count visits and
+            understand which tools are popular. Analytics never receives the
+            contents of your files or text — only general usage data such as:
           </p>
 
           <ul className="list-disc pl-6 mt-3 space-y-2">
@@ -97,6 +117,46 @@ export default function PrivacyPolicyPage() {
             analytics, security monitoring, performance optimization, and other
             operational purposes.
           </p>
+        </section>
+
+        <section>
+          <h2 className="text-2xl font-semibold mb-3">Advertising</h2>
+
+          <p>
+            Acutio is free because it is supported by advertising. We use Google
+            AdSense to show ads. Ads never have access to the files or text you
+            use with our tools — those stay on your device.
+          </p>
+
+          <ul className="list-disc pl-6 mt-3 space-y-2">
+            <li>
+              Third-party vendors, including Google, use cookies to serve ads
+              based on your prior visits to this website or other websites.
+            </li>
+            <li>
+              Google&apos;s use of advertising cookies enables it and its
+              partners to serve ads to you based on your visits to this site
+              and/or other sites on the Internet.
+            </li>
+            <li>
+              You may opt out of personalised advertising by visiting{" "}
+              <a className="text-brand underline" href="https://adssettings.google.com" target="_blank" rel="noopener noreferrer">Google Ads Settings</a>
+              . You can also opt out of some third-party vendors&apos; use of
+              cookies for personalised advertising at{" "}
+              <a className="text-brand underline" href="https://www.aboutads.info/choices/" target="_blank" rel="noopener noreferrer">www.aboutads.info</a>
+              .
+            </li>
+            <li>
+              Learn more about{" "}
+              <a className="text-brand underline" href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener noreferrer">how Google uses information from sites that use its services</a>
+              .
+            </li>
+            <li>
+              Visitors in the European Economic Area, the UK and Switzerland are
+              asked for consent before personalised ads or advertising cookies
+              are used.
+            </li>
+          </ul>
         </section>
 
         <section>

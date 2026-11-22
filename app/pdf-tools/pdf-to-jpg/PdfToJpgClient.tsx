@@ -5,7 +5,6 @@ import { toast } from "sonner";
 import FileDropzone from "@/components/FileDropzone";
 import PdfFileCard from "@/components/PdfFileCard";
 import * as pdfjsLib from "pdfjs-dist";
-import ToolSEO from "@/components/ToolSEO";
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
 
@@ -112,12 +111,7 @@ export default function PdfToJpgPage() {
   };
 
   return (
-    <main className="max-w-5xl mx-auto px-6 py-16">
-      <div className="text-center">
-        <h1 className="text-3xl md:text-5xl font-bold mb-8">PDF to JPG</h1>
-
-        <p className="mt-4 text-gray-500">Convert PDF pages into JPG images.</p>
-      </div>
+    <div>
 
       <div className="mt-10">
         <FileDropzone
@@ -151,7 +145,7 @@ export default function PdfToJpgPage() {
 
               <div className="w-full bg-gray-200 rounded-full h-3">
                 <div
-                  className="bg-black h-3 rounded-full"
+                  className="bg-brand h-3 rounded-full"
                   style={{
                     width: `${progress}%`,
                   }}
@@ -164,7 +158,7 @@ export default function PdfToJpgPage() {
             onClick={convertToJpg}
             disabled={loading}
             className="
-              bg-black
+              bg-brand
               text-white
               px-8
               py-4
@@ -175,36 +169,6 @@ export default function PdfToJpgPage() {
           </button>
         </div>
       )}
-      <ToolSEO
-        title="PDF to JPG Converter"
-        description="Convert PDF pages into high-quality JPG images. Extract pages as images directly from your browser."
-        steps={[
-          "Upload a PDF",
-          "Choose conversion settings",
-          "Convert PDF to JPG",
-          "Download JPG files",
-        ]}
-        features={[
-          "High-quality image export",
-          "Convert every PDF page",
-          "Fast processing",
-          "No account required",
-        ]}
-        faqs={[
-          {
-            question: "Can I convert PDF pages to images?",
-            answer: "Yes. Every PDF page can be exported as a JPG image.",
-          },
-          {
-            question: "Does image quality remain high?",
-            answer: "Yes. Images are generated in high quality.",
-          },
-          {
-            question: "Is this tool free?",
-            answer: "Yes. Acutio PDF to JPG is free.",
-          },
-        ]}
-      />
-    </main>
+    </div>
   );
 }

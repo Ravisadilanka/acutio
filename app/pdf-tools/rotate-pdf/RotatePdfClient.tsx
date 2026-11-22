@@ -5,7 +5,6 @@ import { PDFDocument, degrees } from "pdf-lib";
 import PdfFileCard from "@/components/PdfFileCard";
 import FileDropzone from "@/components/FileDropzone";
 import { toast } from "sonner";
-import ToolSEO from "@/components/ToolSEO";
 
 export default function RotatePdfPage() {
   const [file, setFile] = useState<File | null>(null);
@@ -75,12 +74,7 @@ export default function RotatePdfPage() {
   };
 
   return (
-    <main className="max-w-5xl mx-auto px-6 py-16">
-      <div className="text-center">
-        <h1 className="text-3xl md:text-5xl font-bold mb-8">Rotate PDF</h1>
-
-        <p className="mt-4 text-gray-500">Rotate pages in a PDF file.</p>
-      </div>
+    <div>
 
       <div className="mt-10">
         <FileDropzone
@@ -104,7 +98,7 @@ export default function RotatePdfPage() {
             }}
           />
 
-          <div className="bg-white border rounded-2xl p-6">
+          <div className="bg-surface border rounded-2xl p-6">
             <h2 className="font-semibold mb-4">Rotation</h2>
 
             <div className="flex flex-wrap gap-3">
@@ -113,7 +107,7 @@ export default function RotatePdfPage() {
                   key={angle}
                   onClick={() => setRotation(angle)}
                   className={`px-5 py-3 rounded-xl border ${
-                    rotation === angle ? "bg-black text-white" : "bg-white"
+                    rotation === angle ? "bg-brand text-white" : "bg-surface"
                   }`}
                 >
                   {angle}°
@@ -131,7 +125,7 @@ export default function RotatePdfPage() {
 
                 <div className="w-full bg-gray-200 rounded-full h-3">
                   <div
-                    className="bg-black h-3 rounded-full"
+                    className="bg-brand h-3 rounded-full"
                     style={{
                       width: `${progress}%`,
                     }}
@@ -145,7 +139,7 @@ export default function RotatePdfPage() {
               disabled={loading}
               className="
                 mt-6
-                bg-black
+                bg-brand
                 text-white
                 px-8
                 py-4
@@ -157,37 +151,6 @@ export default function RotatePdfPage() {
           </div>
         </div>
       )}
-      <ToolSEO
-        title="Rotate PDF Online Free"
-        description="Rotate PDF pages by 90, 180, or 270 degrees. Fix incorrectly oriented PDF pages quickly and securely."
-        steps={[
-          "Upload a PDF file",
-          "Choose the rotation angle",
-          "Click Rotate PDF",
-          "Download the rotated PDF",
-        ]}
-        features={[
-          "Rotate all pages",
-          "Multiple angle options",
-          "Fast browser processing",
-          "No software installation",
-        ]}
-        faqs={[
-          {
-            question: "Can I rotate PDF pages online?",
-            answer:
-              "Yes. Upload your file and choose the desired rotation angle.",
-          },
-          {
-            question: "Does rotating affect quality?",
-            answer: "No. The PDF content remains unchanged.",
-          },
-          {
-            question: "Is this tool free?",
-            answer: "Yes. Acutio Rotate PDF is free to use.",
-          },
-        ]}
-      />
-    </main>
+    </div>
   );
 }
