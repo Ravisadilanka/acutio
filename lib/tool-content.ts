@@ -711,6 +711,21 @@ export const toolContent: Record<string, ToolContent> = {
       { q: "Is my voice recorded?", a: "We don't record or store anything. Note that the browser's built-in speech service (e.g. Chrome) may process audio on its provider's servers to recognise speech." },
     ],
   },
+  "audio-to-text": {
+    title: "Audio to Text Converter – Free Transcription (MP3, Voice Notes, Video)",
+    description: "Free audio to text converter. Transcribe MP3, WAV, M4A, WhatsApp voice notes and MP4 videos into text or SRT subtitles in 99 languages — private, runs in your browser.",
+    keywords: ["audio to text", "transcribe audio", "mp3 to text", "voice note to text", "video to text", "audio transcription free", "speech to text from file", "srt subtitle generator"],
+    intro: "Upload a recording, voice note or video and get an accurate transcript in minutes. Powered by OpenAI's open-source Whisper model running privately on your own device — your audio is never uploaded.",
+    steps: ["Choose an audio or video file.", "Pick a quality level and the spoken language.", "Click Transcribe audio.", "Copy the text or download TXT, SRT or VTT subtitles."],
+    features: ["MP3, WAV, M4A, OGG, OPUS, FLAC, MP4, MOV & more", "99 languages, including Sinhala, Tamil and Hindi", "Translate any language to English", "Timestamps plus SRT and VTT subtitles", "Audio never leaves your device"],
+    faqs: [
+      { q: "Is my audio uploaded to a server?", a: "No. The Whisper speech model is downloaded to your browser once (from Hugging Face) and then runs locally. Your recording is processed on your own device and never sent anywhere." },
+      { q: "How long does transcription take?", a: "With the Balanced model, a typical laptop transcribes slightly faster than real time — about 45 minutes for an hour of audio. The Fast model is roughly twice as quick, and Accurate is slower. Text appears as each 30-second part finishes, and phones are slower than computers." },
+      { q: "Why does it download a file first?", a: "The speech recognition model (about 40–250 MB depending on quality) has to be on your device to work offline and privately. It's saved by your browser, so it only downloads the first time." },
+      { q: "How accurate is it for Sinhala and Tamil?", a: "Whisper is excellent for English and most major languages. Sinhala and Tamil work best with the Accurate model and clear audio; expect to correct some words." },
+      { q: "Can I transcribe WhatsApp voice notes?", a: "Yes. Save or share the voice note (.opus or .ogg) to your device and choose it here." },
+    ],
+  },
   "text-to-speech": {
     title: "Text to Speech Online Free – Natural Voices",
     description: "Free text to speech reader. Convert text to natural-sounding speech in many languages and voices, adjust speed and pitch — no sign-up.",

@@ -63,6 +63,13 @@ export default function PrivacyPolicyPage() {
               your browser, not by Acutio.
             </li>
             <li>
+              The Audio to Text tool downloads an open-source speech recognition
+              model (OpenAI Whisper) from Hugging Face the first time you use
+              it, and your browser saves it for later. Hugging Face can see that
+              your browser requested the model, but your audio is transcribed on
+              your device and is never uploaded.
+            </li>
+            <li>
               The Currency Converter downloads a public table of exchange rates
               from ExchangeRate-API (open.er-api.com). Like any website request,
               that service can see your IP address, but the amounts you convert
