@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ChevronRight, ShieldCheck, Zap, BadgeCheck, ChevronDown } from "lucide-react";
-import { getTool, getCategory, relatedTools } from "@/lib/tools";
+import { getTool, getCategory, relatedTools, CONTENT_UPDATED } from "@/lib/tools";
 import { getContent, commonFaqs } from "@/lib/tool-content";
 import { toolJsonLd, JsonLd } from "@/lib/seo";
 import ToolActions from "./ToolActions";
@@ -51,6 +51,9 @@ export default function ToolShell({ slug, children, wide = false }: { slug: stri
             <li className="flex items-center gap-1.5"><BadgeCheck className="h-4 w-4 text-brand" />100% free</li>
             <li className="flex items-center gap-1.5"><ShieldCheck className="h-4 w-4 text-emerald-500" />Private — runs in your browser</li>
             <li className="flex items-center gap-1.5"><Zap className="h-4 w-4 text-amber-500" />No sign-up</li>
+            <li className="text-gray-500">
+              Updated <time dateTime={CONTENT_UPDATED}>{new Date(CONTENT_UPDATED + "T00:00:00Z").toLocaleDateString("en-US", { month: "long", year: "numeric", timeZone: "UTC" })}</time>
+            </li>
           </ul>
         </div>
       </section>

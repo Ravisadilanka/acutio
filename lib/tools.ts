@@ -352,3 +352,5 @@ export const relatedTools = (slug: string, count = 6): Tool[] => {
 
 export const SITE_URL = "https://acutio.com";
 export const SITE_NAME = "Acutio";
+/** Bump when tool pages/content are meaningfully updated (shown on pages + in schema). */
+export const CONTENT_UPDATED = "2026-11-22";
