@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getTool, getCategory, SITE_URL, SITE_NAME, type CategoryId } from "./tools";
+import { getTool, getCategory, SITE_URL, SITE_NAME, CONTENT_UPDATED, type CategoryId } from "./tools";
 import { getContent, commonFaqs } from "./tool-content";
 
 const abs = (path: string) => `${SITE_URL}${path}`;
@@ -63,6 +63,7 @@ export function toolJsonLd(slug: string) {
         operatingSystem: "Any (web browser)",
         browserRequirements: "Requires JavaScript",
         isAccessibleForFree: true,
+        dateModified: CONTENT_UPDATED,
         offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
         featureList: c.features,
         publisher: { "@id": `${SITE_URL}/#org` },
