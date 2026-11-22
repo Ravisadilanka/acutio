@@ -78,6 +78,7 @@ import {
   Sparkles,
   Banknote,
   Languages,
+  FileAudio,
 } from "lucide-react";
 
 export type CategoryId =
@@ -317,6 +318,7 @@ export const tools: Tool[] = [
 
   // ---------------- AUDIO / VIDEO ----------------
   t("audio", "speech-to-text", "Speech to Text", "Dictate and transcribe speech in 60+ languages.", Mic, { popular: true, tags: "voice typing dictation transcribe" }),
+  t("audio", "audio-to-text", "Audio to Text", "Transcribe audio, voice notes and video files to text.", FileAudio, { popular: true, isNew: true, tags: "transcribe transcription mp3 to text voice note whatsapp video to text subtitles srt whisper" }),
   t("audio", "text-to-speech", "Text to Speech", "Read text aloud with natural voices.", Volume2, { popular: true, isNew: true, tags: "tts read aloud voice" }),
   t("audio", "voice-recorder", "Voice Recorder", "Record audio from your microphone and download it.", Disc, { isNew: true, tags: "audio record mic" }),
   t("audio", "screen-recorder", "Screen Recorder", "Record your screen, a window or tab — no install.", MonitorPlay, { isNew: true, tags: "capture screencast video" }),

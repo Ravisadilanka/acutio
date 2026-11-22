@@ -27,11 +27,12 @@ ErrorDocument 404 /404.html
 <IfModule mod_mime.c>
   AddType application/javascript .mjs
   AddType application/manifest+json .webmanifest
+  AddType application/wasm .wasm
 </IfModule>
 
 # Cache hashed build assets for a year, HTML briefly (faster pages = better SEO).
 <IfModule mod_headers.c>
-  <FilesMatch "\.(js|css|woff2|png|svg|ico|webp|mjs)$">
+  <FilesMatch "\.(js|css|woff2|png|svg|ico|webp|mjs|wasm)$">
     Header set Cache-Control "public, max-age=31536000, immutable"
   </FilesMatch>
   <FilesMatch "\.html$">
