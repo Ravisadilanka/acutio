@@ -11,7 +11,6 @@ import PdfFileCard from "@/components/PdfFileCard";
 import PdfPreview from "@/components/PdfPreview";
 import SignatureToolbar from "@/components/SignatureToolbar";
 import type { SignaturePlacement } from "@/components/SignatureOverlay";
-import ToolSEO from "@/components/ToolSEO";
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
 
@@ -341,14 +340,7 @@ export default function SignPdfPage() {
   };
 
   return (
-    <main className="max-w-5xl mx-auto px-6 py-16">
-      <div className="text-center">
-        <h1 className="text-3xl md:text-5xl font-bold mb-8">Sign PDF</h1>
-
-        <p className="mt-4 text-gray-500">
-          Draw your signature and add it to a PDF.
-        </p>
-      </div>
+    <div>
 
       <div className="mt-10">
         <FileDropzone
@@ -442,38 +434,6 @@ export default function SignPdfPage() {
           />
         </div>
       )}
-      <ToolSEO
-        title="Sign PDF Online Free"
-        description="Draw or upload your signature and add it to PDF documents. Sign contracts, forms, and agreements securely online."
-        steps={[
-          "Upload a PDF",
-          "Draw or upload a signature",
-          "Choose page and position",
-          "Download the signed PDF",
-        ]}
-        features={[
-          "Draw signatures",
-          "Upload signature images",
-          "Select signature position",
-          "Browser-based signing",
-        ]}
-        faqs={[
-          {
-            question: "How do I sign a PDF online?",
-            answer:
-              "Upload a PDF, create or upload your signature, and place it where needed.",
-          },
-          {
-            question: "Can I upload an existing signature image?",
-            answer: "Yes. PNG and JPG signature images are supported.",
-          },
-          {
-            question: "Are signed PDFs legally valid?",
-            answer:
-              "Acceptance depends on local laws and the specific use case.",
-          },
-        ]}
-      />
-    </main>
+    </div>
   );
 }

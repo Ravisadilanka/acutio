@@ -6,7 +6,6 @@ import {
   useState,
 } from "react";
 
-import ToolSEO from "@/components/ToolSEO";
 import { useRef } from "react";
 
 import StatsCard from "./components/StatsCard";
@@ -180,16 +179,7 @@ export default function TypingSpeedTestPage() {
 }, []);
 
   return (
-    <main className="max-w-6xl mx-auto px-6 py-16">
-      <h1 className="text-3xl md:text-5xl font-bold mb-8">
-        Typing Speed Test
-      </h1>
-
-      <p className="mt-4 text-gray-500">
-        Measure your typing
-        speed, WPM and
-        accuracy.
-      </p>
+    <div>
 
       <div className="mt-8">
         <TimerSelector
@@ -255,7 +245,7 @@ export default function TypingSpeedTestPage() {
             key={index}
             className={`${className} ${
               isCurrent
-                ? "border-l-2 border-black animate-pulse"
+                ? "border-l-2 border-brand animate-pulse"
                 : ""
             }`}
           >
@@ -308,7 +298,7 @@ export default function TypingSpeedTestPage() {
         onClick={restart}
         className="
           mt-8
-          bg-black
+          bg-brand
           text-white
           px-6
           py-3
@@ -318,36 +308,6 @@ export default function TypingSpeedTestPage() {
         Restart Test
       </button>
 
-      <ToolSEO
-        title="Typing Speed Test"
-        description="Check your typing speed, WPM and accuracy online for free."
-        steps={[
-          "Choose a timer",
-          "Start typing",
-          "Complete the test",
-          "Review your score",
-        ]}
-        features={[
-          "Live WPM",
-          "Accuracy tracking",
-          "Multiple timers",
-          "Typing practice",
-        ]}
-        faqs={[
-          {
-            question:
-              "What is WPM?",
-            answer:
-              "WPM stands for words per minute and measures typing speed.",
-          },
-          {
-            question:
-              "Is this test free?",
-            answer:
-              "Yes, it is completely free.",
-          },
-        ]}
-      />
-    </main>
+    </div>
   );
 }

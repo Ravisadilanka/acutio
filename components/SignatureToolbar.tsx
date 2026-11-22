@@ -59,7 +59,7 @@ export default function SignatureToolbar({
   };
 
   return (
-    <section className="bg-white border rounded-2xl p-6">
+    <section className="bg-surface border rounded-2xl p-6">
       <h2 className="text-xl font-semibold mb-4">Signature</h2>
 
       <div className="flex gap-3 mb-6">
@@ -67,7 +67,7 @@ export default function SignatureToolbar({
           type="button"
           onClick={() => onSignatureModeChange("draw")}
           className={`px-4 py-2 rounded-xl border ${
-            signatureMode === "draw" ? "bg-black text-white" : "bg-white"
+            signatureMode === "draw" ? "bg-brand text-white" : "bg-surface"
           }`}
         >
           Draw
@@ -77,14 +77,14 @@ export default function SignatureToolbar({
           type="button"
           onClick={() => onSignatureModeChange("upload")}
           className={`px-4 py-2 rounded-xl border ${
-            signatureMode === "upload" ? "bg-black text-white" : "bg-white"
+            signatureMode === "upload" ? "bg-brand text-white" : "bg-surface"
           }`}
         >
           Upload
         </button>
       </div>
 
-      <div className="border rounded-xl overflow-hidden bg-white p-3">
+      <div className="border rounded-xl overflow-hidden bg-surface p-3">
         <label className="block font-medium mb-2">Signature Color</label>
 
         <div className="flex items-center gap-4">
@@ -115,7 +115,7 @@ export default function SignatureToolbar({
             canvasProps={{
               width: 900,
               height: 250,
-              className: "bg-white cursor-crosshair border rounded-2xl mt-3",
+              className: "bg-surface cursor-crosshair border rounded-2xl mt-3",
             }}
           />
         )}
@@ -217,7 +217,7 @@ export default function SignatureToolbar({
           type="button"
           onClick={onSign}
           disabled={loading}
-          className="bg-black text-white px-6 py-3 rounded-xl disabled:opacity-50"
+          className="bg-brand text-white px-6 py-3 rounded-xl disabled:opacity-50"
         >
           {loading ? "Signing..." : "Sign PDF"}
         </button>

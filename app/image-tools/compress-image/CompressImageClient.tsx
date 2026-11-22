@@ -1,332 +1,161 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
-
-import { resizeImage } from "./utils/imageResize";
-
-import { convertFormat } from "./utils/imageFormat";
-
+import imageCompression from "browser-image-compression";
+import { Download, Loader2, X } from "lucide-react";
 import FileDropzone from "@/components/FileDropzone";
-
-import { ImageItem, CompressedImage } from "./types";
-
-import { compressImage } from "./utils/imageCompression";
-
+import { Field, NumberField, Panel, Segmented, Stat, baseName, downloadBlob, formatBytes } from "@/components/ui/kit";
 import { convertImageForCompression } from "./utils/imageConverter";
-import ToolSEO from "@/components/ToolSEO";
 
-export default function CompressImagePage() {
-  const [resizeOption, setResizeOption] = useState("50");
+type OutFmt = "original" | "image/jpeg" | "image/webp" | "image/png";
+interface Item {
+  file: File;
+  preview: string;
+  out?: File;
+  outUrl?: string;
+  kept?: boolean; // original kept because compression made it bigger
+  err?: string;
+}
 
-  const [removeMetadata, setRemoveMetadata] = useState(true);
+const ext = (t: string) => (t === "image/jpeg" ? "jpg" : t.split("/")[1]);
 
-  const [outputFormat, setOutputFormat] = useState<"original" | "jpg" | "webp">(
-    "webp",
-  );
+export default function CompressImageClient() {
+  const [items, setItems] = useState<Item[]>([]);
+  const [mode, setMode] = useState<"quality" | "size">("quality");
+  const [quality, setQuality] = useState(75);
+  const [targetKb, setTargetKb] = useState("200");
+  const [maxDim, setMaxDim] = useState("0");
+  const [fmt, setFmt] = useState<OutFmt>("original");
+  const [busy, setBusy] = useState(false);
+  const [progress, setProgress] = useState(0);
 
-  const [images, setImages] = useState<ImageItem[]>([]);
+  const add = (files: File[]) =>
+    setItems((p) => [...p, ...files.map((file) => ({ file, preview: URL.createObjectURL(file) }))]);
 
-  const [results, setResults] = useState<CompressedImage[]>([]);
-
-  const [quality, setQuality] = useState(65);
-
-  const [loading, setLoading] = useState(false);
-
-  const addImages = (files: File[]) => {
-    const newImages = files.map((file) => ({
-      file,
-      preview: URL.createObjectURL(file),
-    }));
-
-    setImages((prev) => [...prev, ...newImages]);
-  };
-
-  const compressImages = async () => {
-    if (!images.length) return;
-
-    try {
-      setLoading(true);
-
-      const compressed = await Promise.all(
-        images.map(async (image) => {
-          let workingFile = await convertImageForCompression(image.file);
-
-          workingFile = await resizeImage(
-            workingFile,
-            resizeOption === "original" ? 100 : Number(resizeOption),
-          );
-
-          workingFile = await convertFormat(workingFile, outputFormat);
-
-          const compressedFile = await compressImage(workingFile, quality);
-
-          return {
-            originalFile: image.file,
-
-            compressedFile,
-
-            preview: URL.createObjectURL(compressedFile),
-          };
-        }),
-      );
-
-      setResults(compressed);
-    } finally {
-      setLoading(false);
+  const compress = async () => {
+    setBusy(true);
+    const next = [...items];
+    for (let i = 0; i < next.length; i++) {
+      setProgress(Math.round((i / next.length) * 100));
+      const it = next[i];
+      try {
+        const src = await convertImageForCompression(it.file); // HEIC/BMP/etc → PNG
+        const fileType = fmt === "original" ? (/jpeg|png|webp/.test(it.file.type) ? it.file.type : "image/jpeg") : fmt;
+        const out = await imageCompression(src, {
+          useWebWorker: true,
+          fileType,
+          initialQuality: mode === "quality" ? quality / 100 : 0.9,
+          maxSizeMB: mode === "size" ? Math.max(0.01, (+targetKb || 200) / 1024) : 50,
+          maxWidthOrHeight: +maxDim > 0 ? +maxDim : undefined,
+          alwaysKeepResolution: mode === "quality" || +maxDim > 0,
+          preserveExif: false, // strip GPS/camera metadata
+        });
+        const named = new File([out], `${baseName(it.file.name)}-compressed.${ext(fileType)}`, { type: fileType });
+        const sameType = fileType === it.file.type;
+        const kept = sameType && named.size >= it.file.size && +maxDim === 0;
+        const final = kept ? it.file : named;
+        if (it.outUrl) URL.revokeObjectURL(it.outUrl);
+        next[i] = { ...it, out: final, outUrl: URL.createObjectURL(final), kept, err: undefined };
+      } catch {
+        next[i] = { ...it, err: "Could not compress this image" };
+      }
+      setItems([...next]);
     }
+    setProgress(100);
+    setBusy(false);
   };
 
-  const downloadImage = (image: CompressedImage) => {
-    const url = URL.createObjectURL(image.compressedFile);
-
-    const a = document.createElement("a");
-
-    a.href = url;
-    a.download = image.compressedFile.name;
-
-    a.click();
-
-    URL.revokeObjectURL(url);
+  const remove = (i: number) => {
+    URL.revokeObjectURL(items[i].preview);
+    setItems(items.filter((_, j) => j !== i));
   };
 
-  const totalOriginal = images.reduce((sum, image) => sum + image.file.size, 0);
-
-  const estimatedSize = totalOriginal * (quality / 100);
-
-  const estimatedSaved = totalOriginal
-    ? (((totalOriginal - estimatedSize) / totalOriginal) * 100).toFixed(1)
-    : "0";
+  const done = items.filter((i) => i.out);
+  const before = done.reduce((s, i) => s + i.file.size, 0);
+  const after = done.reduce((s, i) => s + (i.out?.size ?? 0), 0);
 
   return (
-    <main className="max-w-6xl mx-auto px-6 py-16">
-      <div className="text-center">
-        <h1 className="text-3xl md:text-5xl font-bold mb-8">Compress Image</h1>
+    <div className="space-y-6">
+      <FileDropzone onFilesAdded={add} title="Select images" subtitle="JPG, PNG, WEBP, HEIC, AVIF, GIF, BMP — or drag & drop" accept={{ "image/*": [".heic", ".heif"] }} compact={items.length > 0} />
 
-        <p className="mt-4 text-gray-500">
-          Compress JPG, PNG, WEBP, HEIC, GIF, BMP, TIFF and AVIF images.
-        </p>
-      </div>
-
-      <div className="mt-10">
-        <label className="block font-medium mb-2">Compression Quality</label>
-
-        <input
-          type="range"
-          min="10"
-          max="100"
-          value={quality}
-          onChange={(e) => setQuality(Number(e.target.value))}
-          className="w-full"
-        />
-
-        <p className="mt-2 text-gray-500">{quality}%</p>
-
-        <div className="mt-8">
-          <label className="block font-medium mb-2">Resize</label>
-
-          <select
-            value={resizeOption}
-            onChange={(e) => setResizeOption(e.target.value)}
-            className="
-      border
-      rounded-xl
-      px-4
-      py-3
-      w-full
-    "
-          >
-            <option value="original">Keep Original</option>
-
-            <option value="90">90%</option>
-
-            <option value="75">75%</option>
-
-            <option value="50">50%</option>
-
-            <option value="25">25%</option>
-          </select>
-        </div>
-
-        <div className="mt-8">
-          <label className="block font-medium mb-2">Output Format</label>
-
-          <select
-            value={outputFormat}
-            onChange={(e) =>
-              setOutputFormat(e.target.value as "original" | "jpg" | "webp")
-            }
-            className="
-      border
-      rounded-xl
-      px-4
-      py-3
-      w-full
-    "
-          >
-            <option value="original">Keep Original</option>
-
-            <option value="jpg">JPG</option>
-
-            <option value="webp">WEBP</option>
-          </select>
-        </div>
-
-        <label className="flex gap-3 mt-6">
-          <input
-            type="checkbox"
-            checked={removeMetadata}
-            onChange={(e) => setRemoveMetadata(e.target.checked)}
-          />
-          Remove Metadata
-        </label>
-      </div>
-
-      <div className="mt-8">
-        <FileDropzone
-          onFilesAdded={addImages}
-          title="Select Images"
-          subtitle="Upload images to compress"
-          accept={{
-            "image/*": [],
-          }}
-        />
-      </div>
-
-      {images.length > 0 && (
+      {items.length > 0 && (
         <>
-          <div className="border rounded-2xl p-6 mt-8">
-            <h2 className="font-bold text-xl">Compression Preview</h2>
-
-            <div className="grid md:grid-cols-3 gap-4 mt-4">
-              <div>
-                <p>Original</p>
-
-                <p className="font-semibold">
-                  {(totalOriginal / 1024 / 1024).toFixed(2)} MB
-                </p>
-              </div>
-
-              <div>
-                <p>Estimated</p>
-
-                <p className="font-semibold">
-                  {(estimatedSize / 1024 / 1024).toFixed(2)} MB
-                </p>
-              </div>
-
-              <div>
-                <p>Savings</p>
-
-                <p className="font-semibold">{estimatedSaved}%</p>
-              </div>
+          <Panel className="grid gap-5 md:grid-cols-2">
+            <div className="space-y-4">
+              <Segmented value={mode} onChange={setMode} options={[{ value: "quality", label: "By quality" }, { value: "size", label: "Target file size" }]} />
+              {mode === "quality" ? (
+                <div>
+                  <div className="flex justify-between"><span className="label">Quality</span><span className="text-sm text-gray-600">{quality}% {quality >= 80 ? "· high" : quality >= 60 ? "· balanced" : "· small"}</span></div>
+                  <input type="range" min={10} max={100} value={quality} onChange={(e) => setQuality(+e.target.value)} className="w-full" aria-label="Quality" />
+                </div>
+              ) : (
+                <div>
+                  <NumberField label="Maximum size per image" value={targetKb} onChange={setTargetKb} suffix="KB" min={10} />
+                  <div className="mt-2 flex flex-wrap gap-2">{[20, 50, 100, 200, 500, 1000].map((k) => <button key={k} className={`chip text-xs ${+targetKb === k ? "chip-active" : ""}`} onClick={() => setTargetKb(String(k))}>{k >= 1000 ? `${k / 1000} MB` : `${k} KB`}</button>)}</div>
+                </div>
+              )}
             </div>
+            <div className="space-y-4">
+              <Field label="Output format">
+                <Segmented value={fmt} onChange={setFmt} options={[{ value: "original", label: "Same" }, { value: "image/jpeg", label: "JPG" }, { value: "image/webp", label: "WEBP" }, { value: "image/png", label: "PNG" }]} />
+              </Field>
+              <Field label="Max width/height" hint="Shrinking large photos saves the most space.">
+                <select className="input" value={maxDim} onChange={(e) => setMaxDim(e.target.value)}>
+                  <option value="0">Keep original dimensions</option>
+                  <option value="3840">3840 px (4K)</option>
+                  <option value="2560">2560 px</option>
+                  <option value="1920">1920 px (Full HD)</option>
+                  <option value="1280">1280 px</option>
+                  <option value="800">800 px</option>
+                </select>
+              </Field>
+            </div>
+          </Panel>
+
+          <div className="flex flex-wrap items-center gap-2">
+            <button className="btn-primary px-8 py-3.5 text-base" onClick={compress} disabled={busy}>
+              {busy ? <><Loader2 className="h-5 w-5 animate-spin" /> Compressing… {progress}%</> : `Compress ${items.length} image${items.length > 1 ? "s" : ""}`}
+            </button>
+            {done.length > 1 && (
+              <button className="btn-secondary" onClick={() => done.forEach((i, k) => setTimeout(() => downloadBlob(i.out!, i.out!.name), k * 250))}><Download className="h-4 w-4" /> Download all</button>
+            )}
+            <button className="btn-ghost" onClick={() => { items.forEach((i) => URL.revokeObjectURL(i.preview)); setItems([]); }}>Clear</button>
           </div>
 
-          <div className="text-center mt-8">
-            <button
-              onClick={compressImages}
-              disabled={loading}
-              className="bg-black text-white px-8 py-4 rounded-2xl"
-            >
-              {loading ? "Compressing..." : "Compress Images"}
-            </button>
+          {done.length > 0 && (
+            <div className="grid grid-cols-3 gap-3">
+              <Stat label="Before" value={formatBytes(before)} />
+              <Stat label="After" value={formatBytes(after)} />
+              <Stat accent label="Saved" value={`${before ? Math.max(0, (1 - after / before) * 100).toFixed(0) : 0}%`} />
+            </div>
+          )}
+
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {items.map((it, i) => {
+              const saved = it.out ? (1 - it.out.size / it.file.size) * 100 : 0;
+              return (
+                <div key={it.preview} className="card overflow-hidden">
+                  <div className="relative h-44 bg-gray-100">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={it.outUrl ?? it.preview} alt={it.file.name} className="h-full w-full object-cover" />
+                    {!it.out && !busy && <button onClick={() => remove(i)} className="absolute right-2 top-2 rounded-full bg-black/60 p-1.5 text-white" aria-label="Remove"><X className="h-4 w-4" /></button>}
+                    {it.out && <span className={`absolute left-2 top-2 rounded-full px-2.5 py-1 text-xs font-bold text-white ${saved > 0 ? "bg-emerald-500" : "bg-gray-500"}`}>{saved > 0 ? `−${saved.toFixed(0)}%` : "Already optimal"}</span>}
+                  </div>
+                  <div className="p-4">
+                    <p className="truncate text-sm font-medium text-gray-900">{it.out?.name ?? it.file.name}</p>
+                    <p className="mt-1 text-sm text-gray-500">
+                      {formatBytes(it.file.size)}{it.out && <> → <strong className="text-gray-900">{formatBytes(it.out.size)}</strong></>}
+                    </p>
+                    {it.kept && <p className="mt-1 text-xs text-gray-500">Original kept — it was already smaller.</p>}
+                    {it.err && <p className="mt-1 text-xs text-rose-500">{it.err}</p>}
+                    {it.out && <button className="btn-primary mt-3 w-full py-2.5" onClick={() => downloadBlob(it.out!, it.out!.name)}><Download className="h-4 w-4" /> Download</button>}
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </>
       )}
-
-      {results.length > 0 && (
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
-          {results.map((image, index) => {
-            const original = image.originalFile.size / 1024;
-
-            const compressed = image.compressedFile.size / 1024;
-
-            const saved = (((original - compressed) / original) * 100).toFixed(
-              1,
-            );
-
-            return (
-              <div key={index} className="border rounded-2xl p-4">
-                <Image
-                  src={image.preview}
-                  alt={image.compressedFile.name}
-                  width={400}
-                  height={300}
-                  className="w-full h-48 object-cover rounded-xl"
-                />
-
-                <h3 className="mt-4 font-semibold truncate">
-                  {image.compressedFile.name}
-                </h3>
-
-                <div className="mt-3 text-sm">
-                  <p>Original: {original.toFixed(1)} KB</p>
-
-                  <p>Compressed: {compressed.toFixed(1)} KB</p>
-
-                  <p>Saved: {saved}%</p>
-                </div>
-
-                <button
-                  onClick={() => downloadImage(image)}
-                  className="mt-4 w-full bg-black text-white py-3 rounded-xl"
-                >
-                  Download
-                </button>
-              </div>
-            );
-          })}
-        </div>
-      )}
-
-      <ToolSEO
-        title="Compress Image Online Free"
-        description="Compress JPG, PNG, WEBP, HEIC, AVIF and other image formats online for free. Reduce image file size while maintaining quality directly in your browser."
-        steps={[
-          "Upload one or more images",
-          "Choose compression quality",
-          "Select resize percentage if needed",
-          "Choose output format",
-          "Click Compress Images",
-          "Download the optimized images",
-        ]}
-        features={[
-          "Supports JPG, PNG, WEBP, HEIC, HEIF, GIF, BMP, TIFF and AVIF",
-          "Batch image compression",
-          "Resize images before compression",
-          "Convert images to JPG or WEBP",
-          "Browser-based processing",
-          "No file uploads to external servers",
-          "Fast image optimization",
-        ]}
-        faqs={[
-          {
-            question: "How do I compress an image?",
-            answer:
-              "Upload your image, choose your compression settings and download the optimized version.",
-          },
-          {
-            question: "Is this image compressor free?",
-            answer: "Yes. All Acutio image tools are free to use.",
-          },
-          {
-            question: "Are my images uploaded to a server?",
-            answer:
-              "No. All image processing happens directly inside your browser.",
-          },
-          {
-            question: "Which image formats are supported?",
-            answer:
-              "JPG, JPEG, PNG, WEBP, GIF, BMP, TIFF, HEIC, HEIF and AVIF images are supported.",
-          },
-          {
-            question: "Will image compression reduce quality?",
-            answer:
-              "Compression may slightly reduce image quality depending on your settings, but it significantly decreases file size.",
-          },
-        ]}
-      />
-    </main>
+    </div>
   );
 }

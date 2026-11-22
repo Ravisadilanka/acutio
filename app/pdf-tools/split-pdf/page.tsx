@@ -1,12 +1,13 @@
-import { Metadata } from "next";
+import ToolShell from "@/components/tool/ToolShell";
+import { toolMetadata } from "@/lib/seo";
 import SplitPdfClient from "./SplitPdfClient";
 
-export const metadata: Metadata = {
-  title: "Split PDF Online Free",
-  description:
-    "Split PDF files into separate pages or custom page ranges. Fast and secure browser-based PDF splitter.",
-};
+export const metadata = toolMetadata("split-pdf");
 
-export default function SplitPdfPage() {
-  return <SplitPdfClient />;
+export default function Page() {
+  return (
+    <ToolShell slug="split-pdf">
+      <SplitPdfClient />
+    </ToolShell>
+  );
 }

@@ -7,7 +7,6 @@ import CalculatorResults from "./components/CalculatorResults";
 
 import { CalculatorValues } from "./types";
 import { calculateResults } from "./calculate";
-import ToolSEO from "@/components/ToolSEO";
 import { faqs } from "./faqs";
 const STORAGE_KEY = "ebay-calculator";
 
@@ -81,17 +80,7 @@ export default function EbayFeeCalculatorPage() {
   };
 
   return (
-    <main className="max-w-6xl mx-auto px-6 py-16">
-      <div className="text-center">
-        <h1 className="text-3xl md:text-5xl font-bold mb-8 mb-4">
-          eBay Profit Calculator
-        </h1>
-
-        <p className="mt-4 text-gray-500">
-          Calculate the selling price required to reach your target profit, ROI
-          or margin.
-        </p>
-      </div>
+    <div>
 
       <div className="mt-8 flex justify-center">
         <button
@@ -114,24 +103,6 @@ export default function EbayFeeCalculatorPage() {
         <CalculatorResults results={results} />
       </div>
 
-      <ToolSEO
-        title="eBay Profit Calculator"
-        description="Calculate the selling price needed to reach a target profit, ROI or margin after fees."
-        steps={[
-          "Select your goal type",
-          "Enter costs",
-          "Enter fee percentages",
-          "View the required sale price",
-        ]}
-        features={[
-          "ROI calculations",
-          "Profit calculations",
-          "Margin calculations",
-          "Local save support",
-          "Mobile friendly",
-        ]}
-        faqs={faqs}
-      />
-    </main>
+    </div>
   );
 }

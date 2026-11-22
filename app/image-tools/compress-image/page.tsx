@@ -1,12 +1,13 @@
-import { Metadata } from 'next';
-import CompressImageClient from './CompressImageClient';
+import ToolShell from "@/components/tool/ToolShell";
+import { toolMetadata } from "@/lib/seo";
+import CompressImageClient from "./CompressImageClient";
 
-export const metadata: Metadata = {
-  title: "Compress Image Online Free",
-  description:
-    "Compress JPG, PNG and WEBP images online for free. Reduce image file size directly in your browser.",
-};
+export const metadata = toolMetadata("compress-image");
 
-export default function CompressImagePage() {
-    return <CompressImageClient />;
+export default function Page() {
+  return (
+    <ToolShell slug="compress-image">
+      <CompressImageClient />
+    </ToolShell>
+  );
 }

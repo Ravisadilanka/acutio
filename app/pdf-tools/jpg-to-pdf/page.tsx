@@ -1,12 +1,13 @@
-import { Metadata } from "next";
+import ToolShell from "@/components/tool/ToolShell";
+import { toolMetadata } from "@/lib/seo";
 import JpgToPdfClient from "./JpgToPdfClient";
 
-export const metadata: Metadata = {
-  title: "JPG to PDF Online Free",
-  description:
-    "Convert JPG, PNG, and WEBP images into PDF documents online for free.",
-};
+export const metadata = toolMetadata("jpg-to-pdf");
 
-export default function JpgToPdfPage() {
-  return <JpgToPdfClient />;
+export default function Page() {
+  return (
+    <ToolShell slug="jpg-to-pdf">
+      <JpgToPdfClient />
+    </ToolShell>
+  );
 }

@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/contact-us/" },
   title: "Contact Us",
   description:
     "Get in touch with the Acutio team for support, questions, and feedback.",

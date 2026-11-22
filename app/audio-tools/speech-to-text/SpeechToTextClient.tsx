@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import { languages } from "./util/languages";
-import ToolSEO from "@/components/ToolSEO";
 
 declare global {
   interface Window {
@@ -166,26 +165,17 @@ export default function SpeechToTextPage() {
 
   if (!supported) {
     return (
-      <main className="max-w-5xl mx-auto px-6 py-16">
-        <h1 className="text-4xl font-bold">Speech to Text</h1>
-
-        <p className="mt-6 text-red-500">
+      <div className="card p-6">
+        <p className="text-rose-500">
           Speech recognition is not supported in this browser. Please use
-          Chrome, Edge or Brave.
+          Chrome, Edge or Safari.
         </p>
-      </main>
+      </div>
     );
   }
 
   return (
-    <main className="max-w-5xl mx-auto px-6 py-16">
-      <h1 className="text-3xl md:text-5xl font-bold mb-8">Speech to Text</h1>
-
-      <p className="mt-4 text-gray-500">
-        Convert speech into text using your browser. Supports Sinhala, English,
-        Tamil, Hindi and many more languages.
-      </p>
-
+    <div>
       <div className="mt-8">
         <label className="block font-medium mb-2">Language</label>
 
@@ -221,7 +211,7 @@ export default function SpeechToTextPage() {
   className={
     recording
       ? "bg-red-600 text-white px-6 py-3 rounded-xl"
-      : "bg-black text-white px-6 py-3 rounded-xl"
+      : "bg-brand text-white px-6 py-3 rounded-xl"
   }
 >
   {recording ? "Recording..." : "Start Recording"}
@@ -285,62 +275,6 @@ export default function SpeechToTextPage() {
         "
       />
 
-      <ToolSEO
-        title="Speech to Text Online Free"
-        description="Convert speech into text online for free. Supports Sinhala, English, Tamil, Hindi, Arabic, French, German and many other languages directly in your browser."
-        steps={[
-          "Select your language",
-          "Click Start Recording",
-          "Speak into your microphone",
-          "View the live transcription",
-          "Stop recording when finished",
-          "Copy, edit or download the generated text",
-        ]}
-        features={[
-          "Supports Sinhala speech to text",
-          "Supports English, Tamil, Hindi and 70+ languages",
-          "Start and stop recording anytime",
-          "Continue recording without losing previous text",
-          "Live voice transcription",
-          "Copy text to clipboard",
-          "Download transcription as TXT",
-          "Word and character counter",
-          "No registration required",
-          "Browser-based processing",
-        ]}
-        faqs={[
-          {
-            question: "How does speech to text work?",
-            answer:
-              "The tool uses your browser's speech recognition engine to convert spoken words into editable text in real time.",
-          },
-          {
-            question: "Does this support Sinhala speech recognition?",
-            answer:
-              "Yes. You can select Sinhala (si-LK) and convert Sinhala speech into text directly in your browser.",
-          },
-          {
-            question: "Can I stop recording and continue later?",
-            answer:
-              "Yes. You can stop recording at any time and start again later. New speech is appended to the existing text.",
-          },
-          {
-            question: "Are my recordings uploaded to a server?",
-            answer:
-              "No. Speech recognition is handled by your browser and no audio files are uploaded by Acutio.",
-          },
-          {
-            question: "Which languages are supported?",
-            answer:
-              "The tool supports English, Sinhala, Tamil, Hindi, Arabic, French, German, Spanish, Chinese and many other languages supported by your browser.",
-          },
-          {
-            question: "Is this speech to text tool free?",
-            answer:
-              "Yes. The Acutio Speech to Text tool is completely free to use.",
-          },
-        ]}
-      />
-    </main>
+    </div>
   );
 }

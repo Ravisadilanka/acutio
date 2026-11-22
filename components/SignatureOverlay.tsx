@@ -63,7 +63,7 @@ export default function SignatureOverlay({
             event.stopPropagation();
             onDelete();
           }}
-          className="absolute right-2 top-2 rounded-full border bg-white px-2 py-1 text-xs font-medium text-gray-600 hover:bg-gray-100"
+          className="absolute right-2 top-2 rounded-full border bg-surface px-2 py-1 text-xs font-medium text-gray-600 hover:bg-gray-100"
         >
           Delete
         </button>

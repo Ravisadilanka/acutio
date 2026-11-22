@@ -29,7 +29,7 @@ export default function PdfDropzone({
       p-8 md:p-16
       text-center
       cursor-pointer
-      hover:border-black
+      hover:border-brand
       transition
       "
     >
