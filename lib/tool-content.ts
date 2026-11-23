@@ -88,12 +88,12 @@ export const toolContent: Record<string, ToolContent> = {
   "jpg-to-pdf": {
     title: "JPG to PDF Converter Online Free – Images to PDF",
     description:
-      "Convert JPG, PNG and WEBP images to PDF for free. Combine many photos into one PDF, set page size and margins — no uploads, no watermark.",
+      "Convert JPG, PNG, WEBP and HEIC images to PDF for free. Combine many photos into one PDF in any order, at full quality — no uploads, no watermark.",
     keywords: ["jpg to pdf", "image to pdf", "photo to pdf", "convert jpg to pdf", "pictures to pdf"],
     intro:
-      "Turn photos, scans and screenshots into a single, shareable PDF. Reorder images, choose page orientation and download instantly.",
-    steps: ["Add your JPG, PNG or WEBP images.", "Drag to reorder them.", "Choose page size and orientation.", "Click Convert and download your PDF."],
-    features: ["Multiple images into one PDF", "Supports JPG, PNG, WEBP", "Reorder by drag and drop", "No watermark", "Private, local conversion"],
+      "Turn photos, scans and screenshots into a single, shareable PDF. Drag the images into order and download instantly — each image becomes one page at its original quality.",
+    steps: ["Add your JPG, PNG, WEBP or HEIC images.", "Drag them into the order you want.", "Click Convert to PDF.", "Download your PDF."],
+    features: ["Multiple images into one PDF", "JPG, PNG, WEBP, HEIC, GIF, BMP", "Reorder by drag and drop", "Original image quality", "No watermark", "Private, local conversion"],
     faqs: [
       { q: "How do I convert several images into one PDF?", a: "Add all your images, arrange them in order and click Convert. Each image becomes a page in one PDF file." },
       { q: "Does converting reduce image quality?", a: "Images are embedded at their original resolution, so quality is preserved." },
@@ -107,8 +107,8 @@ export const toolContent: Record<string, ToolContent> = {
     h1: "PNG to PDF",
     intro:
       "Convert PNG screenshots, diagrams and graphics into a PDF document. Transparent areas are placed on a white page, ready to print or share.",
-    steps: ["Add one or more PNG files.", "Reorder them as needed.", "Choose page settings.", "Convert and download the PDF."],
-    features: ["Batch PNG conversion", "Keeps sharp edges and text", "Choose page size", "Free with no watermark", "Runs in your browser"],
+    steps: ["Add one or more PNG files.", "Drag them into the order you want.", "Click Convert to PDF.", "Download the PDF."],
+    features: ["Batch PNG conversion", "Keeps sharp edges and text", "Lossless — no quality loss", "Free with no watermark", "Runs in your browser"],
     faqs: [
       { q: "Can I convert multiple PNG files into one PDF?", a: "Yes. Add as many PNGs as you like; each becomes one page of the PDF." },
       { q: "What happens to transparent backgrounds?", a: "Transparent areas appear white in the PDF, just like printing on paper." },
