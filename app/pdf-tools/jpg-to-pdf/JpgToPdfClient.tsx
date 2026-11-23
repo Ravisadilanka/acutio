@@ -7,7 +7,6 @@ import {
   Droppable,
   type DropResult,
 } from "@hello-pangea/dnd";
-import { PDFDocument } from "pdf-lib";
 import FileDropzone from "@/components/FileDropzone";
 import Image from "next/image";
 import { Trash2 } from "lucide-react";
@@ -51,6 +50,7 @@ export default function JpgToPdfPage() {
   };
 
   const convertToPdf = async () => {
+    const { PDFDocument } = await import("pdf-lib"); // loaded on demand (keeps page load light)
     if (!images.length) return;
 
     try {

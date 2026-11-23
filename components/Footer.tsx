@@ -23,13 +23,13 @@ export default function Footer() {
           <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-5">
             {categories.map((c) => (
               <div key={c.id}>
-                <Link href={c.href} className="text-sm font-semibold text-gray-900 hover:text-brand">
+                <Link prefetch={false} href={c.href} className="text-sm font-semibold text-gray-900 hover:text-brand-ink">
                   {c.name}
                 </Link>
                 <ul className="mt-3 space-y-2">
                   {toolsIn(c.id).slice(0, 6).map((t) => (
                     <li key={t.slug}>
-                      <Link href={t.href} className="text-sm text-gray-600 hover:text-brand">
+                      <Link prefetch={false} href={t.href} className="text-sm text-gray-600 hover:text-brand-ink">
                         {t.name}
                       </Link>
                     </li>
@@ -43,10 +43,10 @@ export default function Footer() {
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t pt-6 text-sm text-gray-500 md:flex-row">
           <p>© {new Date().getFullYear()} Acutio. Free tools for everyone.</p>
           <div className="flex flex-wrap justify-center gap-5">
-            <Link href="/about-us/" className="hover:text-gray-900">About</Link>
-            <Link href="/contact-us/" className="hover:text-gray-900">Contact</Link>
-            <Link href="/privacy-policy/" className="hover:text-gray-900">Privacy</Link>
-            <Link href="/terms-and-conditions/" className="hover:text-gray-900">Terms</Link>
+            <Link prefetch={false} href="/about-us/" className="hover:text-gray-900">About</Link>
+            <Link prefetch={false} href="/contact-us/" className="hover:text-gray-900">Contact</Link>
+            <Link prefetch={false} href="/privacy-policy/" className="hover:text-gray-900">Privacy</Link>
+            <Link prefetch={false} href="/terms-and-conditions/" className="hover:text-gray-900">Terms</Link>
           </div>
         </div>
       </div>

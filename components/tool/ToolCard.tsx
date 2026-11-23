@@ -8,6 +8,7 @@ export default function ToolCard({ tool }: { tool: Tool }) {
   return (
     <Link
       href={tool.href}
+      prefetch={false}
       className="group card relative flex h-full gap-4 p-5 transition duration-200 hover:-translate-y-0.5 hover:border-brand/40 hover:shadow-xl hover:shadow-brand/5"
     >
       <span className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl ${cat.tint}`}>
@@ -16,7 +17,7 @@ export default function ToolCard({ tool }: { tool: Tool }) {
       <span className="min-w-0">
         <span className="flex items-center gap-2 font-semibold text-gray-900">
           {tool.name}
-          {tool.isNew && <span className="rounded-full bg-brand-soft px-1.5 py-0.5 text-[10px] font-bold uppercase text-brand">New</span>}
+          {tool.isNew && <span className="rounded-full bg-brand-soft px-1.5 py-0.5 text-[10px] font-bold uppercase text-brand-ink">New</span>}
         </span>
         <span className="mt-1 block text-sm leading-snug text-gray-500">{tool.description}</span>
       </span>

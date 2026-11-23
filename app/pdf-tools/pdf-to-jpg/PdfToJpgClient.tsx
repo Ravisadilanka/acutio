@@ -4,9 +4,8 @@ import { useState } from "react";
 import { toast } from "sonner";
 import FileDropzone from "@/components/FileDropzone";
 import PdfFileCard from "@/components/PdfFileCard";
-import * as pdfjsLib from "pdfjs-dist";
+import { getPdfjs } from "@/lib/pdf";
 
-pdfjsLib.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
 
 export default function PdfToJpgPage() {
   const [file, setFile] = useState<File | null>(null);
@@ -18,6 +17,7 @@ export default function PdfToJpgPage() {
   const [progress, setProgress] = useState(0);
 
   const handleFiles = async (files: File[]) => {
+    const pdfjsLib = await getPdfjs();
     const pdfFile = files[0];
 
     if (!pdfFile) return;
@@ -41,6 +41,7 @@ export default function PdfToJpgPage() {
   };
 
   const convertToJpg = async () => {
+    const pdfjsLib = await getPdfjs();
     if (!file) return;
 
     try {

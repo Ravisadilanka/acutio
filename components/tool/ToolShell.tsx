@@ -48,7 +48,7 @@ export default function ToolShell({ slug, children, wide = false }: { slug: stri
           </div>
 
           <ul className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-sm text-gray-600">
-            <li className="flex items-center gap-1.5"><BadgeCheck className="h-4 w-4 text-brand" />100% free</li>
+            <li className="flex items-center gap-1.5"><BadgeCheck className="h-4 w-4 text-brand-ink" />100% free</li>
             <li className="flex items-center gap-1.5"><ShieldCheck className="h-4 w-4 text-emerald-500" />Private — runs in your browser</li>
             <li className="flex items-center gap-1.5"><Zap className="h-4 w-4 text-amber-500" />No sign-up</li>
             <li className="text-gray-500">
@@ -67,7 +67,7 @@ export default function ToolShell({ slug, children, wide = false }: { slug: stri
             <ol className="mt-4 space-y-3">
               {c.steps.map((s, i) => (
                 <li key={s} className="flex gap-3 text-gray-700">
-                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-soft text-xs font-bold text-brand">{i + 1}</span>
+                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-soft text-xs font-bold text-brand-ink">{i + 1}</span>
                   <span>{s}</span>
                 </li>
               ))}
@@ -104,7 +104,7 @@ export default function ToolShell({ slug, children, wide = false }: { slug: stri
         <div className="mt-14">
           <div className="flex items-end justify-between">
             <h2 className="text-2xl font-bold text-gray-900">Related tools</h2>
-            <Link href={cat.href} className="text-sm font-medium text-brand hover:underline">All {cat.name} →</Link>
+            <Link href={cat.href} className="text-sm font-medium text-brand-ink hover:underline">All {cat.name} →</Link>
           </div>
           <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {relatedTools(slug).map((t) => (

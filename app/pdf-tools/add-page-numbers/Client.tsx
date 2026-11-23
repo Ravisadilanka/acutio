@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { Download, Loader2 } from "lucide-react";
-import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
 import FileDropzone from "@/components/FileDropzone";
 import PdfFileBar from "@/components/tools/PdfFileBar";
 import { Field, NumberField, Panel, baseName, downloadBlob } from "@/components/ui/kit";
@@ -24,6 +23,7 @@ export default function Client() {
   const [err, setErr] = useState("");
 
   const pick = async (f: File) => {
+    const { PDFDocument } = await import("pdf-lib"); // loaded on demand (keeps page load light)
     setErr("");
     try {
       const doc = await PDFDocument.load(await f.arrayBuffer());
@@ -35,6 +35,7 @@ export default function Client() {
   };
 
   const run = async () => {
+    const { PDFDocument, StandardFonts, rgb } = await import("pdf-lib"); // loaded on demand (keeps page load light)
     if (!file) return;
     setBusy(true);
     try {

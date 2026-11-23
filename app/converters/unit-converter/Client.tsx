@@ -79,7 +79,7 @@ export default function Client() {
           </div>
         </div>
         <p className="mt-4 text-center text-lg text-gray-700">
-          <strong className="text-gray-900">{value || 0} {groups[group][from][0].toLowerCase()}</strong> = <strong className="text-brand">{show(main)} {groups[group][to][0].toLowerCase()}</strong>
+          <strong className="text-gray-900">{value || 0} {groups[group][from][0].toLowerCase()}</strong> = <strong className="text-brand-ink">{show(main)} {groups[group][to][0].toLowerCase()}</strong>
         </p>
       </Panel>
 

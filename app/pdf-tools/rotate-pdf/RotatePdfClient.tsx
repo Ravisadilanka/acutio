@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { PDFDocument, degrees } from "pdf-lib";
 import PdfFileCard from "@/components/PdfFileCard";
 import FileDropzone from "@/components/FileDropzone";
 import { toast } from "sonner";
@@ -18,6 +17,7 @@ export default function RotatePdfPage() {
   const [progress, setProgress] = useState(0);
 
   const handleFiles = async (files: File[]) => {
+    const { PDFDocument } = await import("pdf-lib"); // loaded on demand (keeps page load light)
     const pdfFile = files[0];
 
     if (!pdfFile) return;
@@ -31,6 +31,7 @@ export default function RotatePdfPage() {
   };
 
   const rotatePdf = async () => {
+    const { PDFDocument, degrees } = await import("pdf-lib"); // loaded on demand (keeps page load light)
     if (!file) return;
 
     try {

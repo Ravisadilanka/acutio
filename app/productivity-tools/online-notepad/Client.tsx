@@ -48,7 +48,7 @@ export default function Client() {
         <ul className="flex-1 overflow-y-auto px-2 pb-2">
           {[...notes].sort((a, b) => b.updated - a.updated).map((n) => (
             <li key={n.id}>
-              <button onClick={() => setActiveId(n.id)} className={`group flex w-full items-center justify-between gap-2 rounded-lg px-3 py-2 text-left text-sm ${n.id === activeId ? "bg-brand-soft text-brand" : "text-gray-700 hover:bg-gray-50"}`}>
+              <button onClick={() => setActiveId(n.id)} className={`group flex w-full items-center justify-between gap-2 rounded-lg px-3 py-2 text-left text-sm ${n.id === activeId ? "bg-brand-soft text-brand-ink" : "text-gray-700 hover:bg-gray-50"}`}>
                 <span className="min-w-0">
                   <span className="block truncate font-medium">{title(n)}</span>
                   <span className="block text-xs opacity-70">{new Date(n.updated).toLocaleString(undefined, { dateStyle: "short", timeStyle: "short" })}</span>

@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { Download, Loader2 } from "lucide-react";
-import { PDFDocument } from "pdf-lib";
 import FileDropzone from "@/components/FileDropzone";
 import PdfFileBar from "@/components/tools/PdfFileBar";
 import { Panel, Stat, baseName, canvasToBlob, downloadBlob, formatBytes } from "@/components/ui/kit";
@@ -39,6 +38,7 @@ export default function Client() {
   };
 
   const compress = async () => {
+    const { PDFDocument } = await import("pdf-lib"); // loaded on demand (keeps page load light)
     if (!file) return;
     setBusy(true);
     setOut(null);

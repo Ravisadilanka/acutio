@@ -33,7 +33,7 @@ function Row({
         <input type="number" className="input w-32" value={b} onChange={(e) => setB(e.target.value)} />
         {after && <span>{after}</span>}
         <span className="text-gray-400">=</span>
-        <span className="rounded-xl bg-brand-soft px-4 py-2.5 text-xl font-bold text-brand tabular-nums">{result}</span>
+        <span className="rounded-xl bg-brand-soft px-4 py-2.5 text-xl font-bold text-brand-ink tabular-nums">{result}</span>
       </div>
       <p className="mt-3 font-mono text-xs text-gray-500">{formula}</p>
     </Panel>

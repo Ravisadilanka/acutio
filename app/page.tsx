@@ -59,7 +59,7 @@ export default function Home() {
             return (
               <div key={c.id} className="card group relative overflow-hidden p-6 transition hover:shadow-xl hover:shadow-brand/5">
                 <div className={`pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-gradient-to-br ${c.gradient} opacity-10 blur-2xl transition group-hover:opacity-25`} />
-                <Link href={c.href} className="flex items-center gap-3">
+                <Link prefetch={false} href={c.href} className="flex items-center gap-3">
                   <span className={`flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br ${c.gradient} text-white shadow-lg`}>
                     <c.icon className="h-6 w-6" />
                   </span>
@@ -71,13 +71,13 @@ export default function Home() {
                 <ul className="mt-5 grid grid-cols-2 gap-x-4 gap-y-2">
                   {list.slice(0, 8).map((t) => (
                     <li key={t.slug}>
-                      <Link href={t.href} className="block truncate text-sm text-gray-600 hover:text-brand">
+                      <Link prefetch={false} href={t.href} className="block truncate text-sm text-gray-600 hover:text-brand-ink">
                         {t.name}
                       </Link>
                     </li>
                   ))}
                 </ul>
-                <Link href={c.href} className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-brand">
+                <Link prefetch={false} href={c.href} className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-brand-ink">
                   View all <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
                 </Link>
               </div>
@@ -116,7 +116,7 @@ export default function Home() {
         <ul className="mt-6 columns-2 gap-6 text-sm sm:columns-3 lg:columns-5">
           {[...tools].sort((a, b) => a.name.localeCompare(b.name)).map((t) => (
             <li key={t.slug} className="mb-2 break-inside-avoid">
-              <Link href={t.href} className="text-gray-600 hover:text-brand">
+              <Link prefetch={false} href={t.href} className="text-gray-600 hover:text-brand-ink">
                 {t.name}
               </Link>
             </li>

@@ -39,8 +39,8 @@ export default function Client() {
       <div className="flex flex-wrap justify-center gap-2">
         <button className="btn-secondary" onClick={() => setRot((r) => (r + 270) % 360)}><RotateCcw className="h-4 w-4" /> Rotate left</button>
         <button className="btn-secondary" onClick={() => setRot((r) => (r + 90) % 360)}><RotateCw className="h-4 w-4" /> Rotate right</button>
-        <button className={`btn-secondary ${fx ? "border-brand text-brand" : ""}`} onClick={() => setFx(!fx)}><FlipHorizontal className="h-4 w-4" /> Flip horizontal</button>
-        <button className={`btn-secondary ${fy ? "border-brand text-brand" : ""}`} onClick={() => setFy(!fy)}><FlipVertical className="h-4 w-4" /> Flip vertical</button>
+        <button className={`btn-secondary ${fx ? "border-brand text-brand-ink" : ""}`} onClick={() => setFx(!fx)}><FlipHorizontal className="h-4 w-4" /> Flip horizontal</button>
+        <button className={`btn-secondary ${fy ? "border-brand text-brand-ink" : ""}`} onClick={() => setFy(!fy)}><FlipVertical className="h-4 w-4" /> Flip vertical</button>
         <button className="btn-primary" onClick={save}><Download className="h-4 w-4" /> Download</button>
         <button className="btn-ghost" onClick={() => setImg(null)}>New image</button>
       </div>

@@ -147,15 +147,15 @@ export default function PrivacyPolicyPage() {
             </li>
             <li>
               You may opt out of personalised advertising by visiting{" "}
-              <a className="text-brand underline" href="https://adssettings.google.com" target="_blank" rel="noopener noreferrer">Google Ads Settings</a>
+              <a className="text-brand-ink underline" href="https://adssettings.google.com" target="_blank" rel="noopener noreferrer">Google Ads Settings</a>
               . You can also opt out of some third-party vendors&apos; use of
               cookies for personalised advertising at{" "}
-              <a className="text-brand underline" href="https://www.aboutads.info/choices/" target="_blank" rel="noopener noreferrer">www.aboutads.info</a>
+              <a className="text-brand-ink underline" href="https://www.aboutads.info/choices/" target="_blank" rel="noopener noreferrer">www.aboutads.info</a>
               .
             </li>
             <li>
               Learn more about{" "}
-              <a className="text-brand underline" href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener noreferrer">how Google uses information from sites that use its services</a>
+              <a className="text-brand-ink underline" href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener noreferrer">how Google uses information from sites that use its services</a>
               .
             </li>
             <li>

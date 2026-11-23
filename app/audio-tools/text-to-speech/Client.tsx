@@ -70,7 +70,7 @@ export default function Client() {
       <div>
         {state !== "idle" && pos ? (
           <div className="min-h-[340px] whitespace-pre-wrap rounded-xl border bg-surface p-4 text-lg leading-relaxed text-gray-800">
-            {text.slice(0, pos[0])}<mark className="rounded bg-brand-soft text-brand">{text.slice(pos[0], pos[1])}</mark>{text.slice(pos[1])}
+            {text.slice(0, pos[0])}<mark className="rounded bg-brand-soft text-brand-ink">{text.slice(pos[0], pos[1])}</mark>{text.slice(pos[1])}
           </div>
         ) : (
           <textarea className="textarea min-h-[340px] font-sans text-lg" value={text} onChange={(e) => setText(e.target.value)} placeholder="Type or paste text to read aloud…" aria-label="Text to speak" />

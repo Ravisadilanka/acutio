@@ -70,7 +70,7 @@ export default function Client() {
       <Panel className="space-y-5">
         <div className="flex items-center justify-between text-sm">
           <span className="truncate text-gray-600">{file?.name} · {img.naturalWidth}×{img.naturalHeight}px · {formatBytes(file?.size ?? 0)}</span>
-          <button className="text-brand hover:underline" onClick={() => { setImg(null); setOut(null); }}>Change</button>
+          <button className="text-brand-ink hover:underline" onClick={() => { setImg(null); setOut(null); }}>Change</button>
         </div>
         <Segmented value={mode} onChange={setMode} options={[{ value: "px", label: "By pixels" }, { value: "pct", label: "By percentage" }]} />
         {mode === "px" ? (

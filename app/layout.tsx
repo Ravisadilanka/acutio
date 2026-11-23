@@ -75,10 +75,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           />
         )}
 
-        {/* Google Analytics (aggregate page-view statistics only; loaded last so it never slows tools down). */}
-        <Script src="https://www.googletagmanager.com/gtag/js?id=G-V8K1Y4XVBR" strategy="lazyOnload" />
-        <Script id="google-analytics" strategy="lazyOnload">
-          {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-V8K1Y4XVBR',{anonymize_ip:true});`}
+        {/* Google Analytics (aggregate page-view statistics only). The ~180 KB gtag library is
+            only fetched on the visitor's first interaction or after 4 s, so it never competes
+            with page load (it was the largest main-thread blocker in Lighthouse). */}
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}window.gtag=gtag;gtag('js',new Date());gtag('config','G-V8K1Y4XVBR',{anonymize_ip:true});
+(function(){var done=false,ev=['pointerdown','keydown','scroll','touchstart'];function load(){if(done)return;done=true;ev.forEach(function(e){removeEventListener(e,load,{passive:true})});var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-V8K1Y4XVBR';document.head.appendChild(s);}
+ev.forEach(function(e){addEventListener(e,load,{passive:true,once:true})});setTimeout(load,4000);})();`}
         </Script>
       </body>
     </html>

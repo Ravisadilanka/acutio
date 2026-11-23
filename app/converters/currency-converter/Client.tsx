@@ -78,7 +78,7 @@ export default function Client() {
         </div>
         <div className="mt-6 rounded-2xl bg-brand-soft p-5">
           <p className="text-gray-600">{money(a, from)} =</p>
-          <p className="mt-1 text-4xl font-extrabold tabular-nums text-brand sm:text-5xl">{data ? money(result, to) : "…"}</p>
+          <p className="mt-1 text-4xl font-extrabold tabular-nums text-brand-ink sm:text-5xl">{data ? money(result, to) : "…"}</p>
           {data && (
             <p className="mt-2 text-sm text-gray-600">
               1 {from} = {conv(1, from, to).toLocaleString(undefined, { maximumFractionDigits: 6 })} {to} · 1 {to} = {conv(1, to, from).toLocaleString(undefined, { maximumFractionDigits: 6 })} {from}

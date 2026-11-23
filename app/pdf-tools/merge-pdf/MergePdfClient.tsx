@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { PDFDocument } from "pdf-lib";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 
 import PdfFileCard from "@/components/PdfFileCard";
@@ -19,6 +18,7 @@ export default function MergePdfPage() {
   const [progress, setProgress] = useState(0);
 
   const addFiles = async (newFiles: File[]) => {
+    const { PDFDocument } = await import("pdf-lib"); // loaded on demand (keeps page load light)
     const processed: PdfItem[] = [];
 
     for (const file of newFiles) {
@@ -56,6 +56,7 @@ export default function MergePdfPage() {
   };
 
   const mergePdfs = async () => {
+    const { PDFDocument } = await import("pdf-lib"); // loaded on demand (keeps page load light)
     if (files.length < 2) {
       toast.error("Please upload at least 2 PDFs");
       return;

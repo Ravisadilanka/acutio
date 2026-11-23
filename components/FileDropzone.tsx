@@ -35,7 +35,7 @@ export default function FileDropzone({
         compact ? "p-6" : "p-10 md:p-16"
       } ${isDragActive ? "border-brand bg-brand-soft" : "border-gray-300 bg-gray-50 hover:border-brand hover:bg-brand-soft"}`}
     >
-      <input {...getInputProps()} />
+      <input {...getInputProps({ "aria-label": title })} />
       <span className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-brand text-white shadow-lg shadow-brand/30 transition group-hover:scale-105">
         <UploadCloud className="h-8 w-8" />
       </span>

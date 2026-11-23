@@ -68,7 +68,7 @@ export default function Client() {
         <textarea className="textarea min-h-32" value={text} onChange={(e) => setText(e.target.value)} aria-label="Text to hash" />
       ) : (
         <label className="flex cursor-pointer items-center gap-3 rounded-2xl border-2 border-dashed border-gray-300 bg-gray-50 p-6 hover:border-brand">
-          <FileUp className="h-6 w-6 text-brand" />
+          <FileUp className="h-6 w-6 text-brand-ink" />
           <span className="text-gray-700">{file ? `${file.name} (${formatBytes(file.size)})` : "Choose a file to hash (stays on your device)"}</span>
           <input type="file" className="hidden" onChange={(e) => setFile(e.target.files?.[0] ?? null)} />
         </label>

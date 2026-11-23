@@ -59,11 +59,11 @@ export default function Client() {
           {out.length === 0 ? (
             <p className="py-12 text-center text-gray-500">Press Generate to get your random number{+count > 1 ? "s" : ""}.</p>
           ) : out.length === 1 ? (
-            <p className="py-6 text-center text-7xl font-extrabold tabular-nums text-brand animate-fade-up">{out[0]}</p>
+            <p className="py-6 text-center text-7xl font-extrabold tabular-nums text-brand-ink animate-fade-up">{out[0]}</p>
           ) : (
             <>
               <div className="flex max-h-80 flex-wrap gap-2 overflow-y-auto">
-                {out.map((n, i) => <span key={i} className="rounded-lg bg-brand-soft px-3 py-1.5 font-mono font-semibold text-brand">{n}</span>)}
+                {out.map((n, i) => <span key={i} className="rounded-lg bg-brand-soft px-3 py-1.5 font-mono font-semibold text-brand-ink">{n}</span>)}
               </div>
               <div className="mt-4"><CopyButton text={out.join(", ")} label="Copy all" /></div>
             </>
