@@ -5,10 +5,12 @@ import { getContent, commonFaqs } from "@/lib/tool-content";
 import { toolJsonLd, JsonLd } from "@/lib/seo";
 import ToolActions from "./ToolActions";
 import ToolCard from "./ToolCard";
+import { toolGuides } from "@/lib/tool-guides";
 
 /**
  * Wraps every tool page with: breadcrumbs, H1 + intro, trust badges, the
- * interactive tool (children), how-to steps, features, FAQ accordion,
+ * interactive tool (children), how-to steps, features, an optional long-form
+ * guide (lib/tool-guides.ts), FAQ accordion,
  * related tools and JSON-LD structured data.
  */
 export default function ToolShell({ slug, children, wide = false }: { slug: string; children: React.ReactNode; wide?: boolean }) {
@@ -17,6 +19,7 @@ export default function ToolShell({ slug, children, wide = false }: { slug: stri
   const c = getContent(slug);
   const faqs = [...c.faqs, ...commonFaqs(tool.name)];
   const Icon = tool.icon;
+  const guide = toolGuides[slug];
 
   return (
     <main>
@@ -85,6 +88,45 @@ export default function ToolShell({ slug, children, wide = false }: { slug: stri
             </ul>
           </div>
         </div>
+
+        {guide && (
+          <article className="mt-12 rounded-2xl border bg-surface p-6 sm:p-8">
+            <h2 className="text-2xl font-bold tracking-tight text-gray-900">{guide.title}</h2>
+            {guide.sections.map((sec) => (
+              <section key={sec.h} className="mt-8">
+                <h3 className="text-lg font-semibold text-gray-900">{sec.h}</h3>
+                {sec.table && (
+                  <div className="mt-3 overflow-x-auto rounded-xl border">
+                    <table className="w-full text-left text-sm">
+                      <thead className="bg-gray-50 text-gray-700">
+                        <tr>
+                          <th scope="col" className="px-4 py-2.5 font-semibold">{sec.table.head[0]}</th>
+                          <th scope="col" className="px-4 py-2.5 font-semibold">{sec.table.head[1]}</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y">
+                        {sec.table.rows.map(([a, b]) => (
+                          <tr key={a}>
+                            <td className="whitespace-nowrap px-4 py-2.5 align-top font-medium text-gray-900">{a}</td>
+                            <td className="px-4 py-2.5 text-gray-600">{b}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
+                {sec.p?.map((para) => (
+                  <p key={para} className="mt-3 leading-relaxed text-gray-600">{para}</p>
+                ))}
+                {sec.list && (
+                  <ul className="mt-3 list-disc space-y-2 pl-5 leading-relaxed text-gray-600 marker:text-gray-400">
+                    {sec.list.map((li) => <li key={li}>{li}</li>)}
+                  </ul>
+                )}
+              </section>
+            ))}
+          </article>
+        )}
 
         <div className="mt-12">
           <h2 className="text-2xl font-bold text-gray-900">Frequently asked questions</h2>
