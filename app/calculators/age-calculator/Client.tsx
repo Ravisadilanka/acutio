@@ -1,9 +1,13 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Field, Panel, Stat, fmt } from "@/components/ui/kit";
 
-const today = () => new Date().toISOString().slice(0, 10);
+// Local date (toISOString would give the UTC date — "yesterday" for part of the day east of UTC).
+const today = () => {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+};
 
 function diff(from: Date, to: Date) {
   let y = to.getFullYear() - from.getFullYear();
@@ -22,7 +26,9 @@ function diff(from: Date, to: Date) {
 
 export default function Client() {
   const [dob, setDob] = useState("2000-01-01");
-  const [on, setOn] = useState(today());
+  // Today's date is set in the browser (not baked in at build time).
+  const [on, setOn] = useState("");
+  useEffect(() => setOn(today()), []);
 
   const r = useMemo(() => {
     const b = new Date(dob + "T00:00:00");

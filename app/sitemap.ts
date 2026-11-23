@@ -3,12 +3,14 @@ import { categories, tools, SITE_URL } from "@/lib/tools";
 
 export const dynamic = "force-static";
 
-/** Generated from the tool registry — new tools appear automatically. */
+/**
+ * Generated from the tool registry — new tools appear automatically.
+ * <lastmod> is filled in after the build by scripts/lastmod.mjs, which only
+ * changes a page's date when its content actually changed.
+ */
 export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date();
   const u = (path: string, priority: number, changeFrequency: "weekly" | "monthly" | "yearly" = "weekly") => ({
     url: `${SITE_URL}${path}`,
-    lastModified: now,
     changeFrequency,
     priority,
   });

@@ -35,15 +35,14 @@ export default function TypingSpeedTestPage() {
     const typingAreaRef =
   useRef<HTMLDivElement>(null);
 
-  const [text, setText] =
-    useState(
-      paragraphs[
-        Math.floor(
-          Math.random() *
-            paragraphs.length
-        )
-      ]
-    );
+  // Start with a fixed paragraph so the pre-built HTML matches the first
+  // client render (a random pick here caused a hydration mismatch), then
+  // choose a random one once the page is running in the browser.
+  const [text, setText] = useState(paragraphs[0]);
+
+  useEffect(() => {
+    setText(paragraphs[Math.floor(Math.random() * paragraphs.length)]);
+  }, []);
 
   useEffect(() => {
     setTimeLeft(duration);
