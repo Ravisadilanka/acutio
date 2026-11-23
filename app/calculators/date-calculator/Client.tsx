@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Field, NumberField, Panel, Segmented, Stat, fmt } from "@/components/ui/kit";
 
 const iso = (d: Date) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
@@ -8,11 +8,17 @@ const parse = (s: string) => new Date(s + "T00:00:00");
 
 export default function Client() {
   const [mode, setMode] = useState<"diff" | "add">("diff");
-  const now = new Date();
-  const [start, setStart] = useState(iso(now));
-  const [end, setEnd] = useState(iso(new Date(now.getFullYear(), 11, 31)));
+  // Dates are filled in the browser (not baked in at build time).
+  const [start, setStart] = useState("");
+  const [end, setEnd] = useState("");
   const [inclusive, setInclusive] = useState(false);
-  const [base, setBase] = useState(iso(now));
+  const [base, setBase] = useState("");
+  useEffect(() => {
+    const now = new Date();
+    setStart(iso(now));
+    setEnd(iso(new Date(now.getFullYear(), 11, 31)));
+    setBase(iso(now));
+  }, []);
   const [n, setN] = useState("30");
   const [unit, setUnit] = useState("days");
   const [sign, setSign] = useState<"+" | "-">("+");

@@ -31,3 +31,7 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./out/
           server-dir: ./
+
+      # Tell Bing & other IndexNow engines which pages changed (Google reads the sitemap dates).
+      - name: Notify search engines (IndexNow)
+        run: node scripts/indexnow.mjs
