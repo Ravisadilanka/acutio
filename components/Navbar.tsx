@@ -36,7 +36,7 @@ export default function Navbar() {
               <Link
                 key={id}
                 href={c.href}
-                className={`rounded-lg px-3 py-2 transition hover:bg-gray-100 hover:text-gray-900 ${active ? "text-brand" : "text-gray-600"}`}
+                className={`rounded-lg px-3 py-2 transition hover:bg-gray-100 hover:text-gray-900 ${active ? "text-brand-ink" : "text-gray-600"}`}
               >
                 {c.name}
               </Link>
@@ -56,7 +56,7 @@ export default function Navbar() {
                 <div className="card grid max-h-[75vh] grid-cols-3 gap-x-6 gap-y-5 overflow-y-auto p-6 shadow-2xl animate-fade-up">
                   {categories.map((c) => (
                     <div key={c.id}>
-                      <Link href={c.href} className="mb-2 flex items-center gap-2 text-sm font-semibold text-gray-900 hover:text-brand">
+                      <Link href={c.href} className="mb-2 flex items-center gap-2 text-sm font-semibold text-gray-900 hover:text-brand-ink">
                         <span className={`flex h-7 w-7 items-center justify-center rounded-lg ${c.tint}`}>
                           <c.icon className="h-4 w-4" />
                         </span>
@@ -65,7 +65,7 @@ export default function Navbar() {
                       <ul className="space-y-1">
                         {toolsIn(c.id).slice(0, 7).map((t) => (
                           <li key={t.slug}>
-                            <Link href={t.href} className="block truncate rounded px-1 py-0.5 text-sm text-gray-600 hover:text-brand">
+                            <Link href={t.href} className="block truncate rounded px-1 py-0.5 text-sm text-gray-600 hover:text-brand-ink">
                               {t.name}
                             </Link>
                           </li>

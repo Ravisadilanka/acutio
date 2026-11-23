@@ -26,13 +26,13 @@ export default function Hero({ toolCount }: { toolCount: number }) {
           {toolCount}+ tools · 100% free · no sign-up
         </p>
 
-        <h1 className="mt-6 text-4xl font-extrabold tracking-tight text-gray-900 sm:text-6xl animate-fade-up" style={{ animationDelay: "60ms" }}>
+        <h1 className="mt-6 text-4xl font-extrabold tracking-tight text-gray-900 sm:text-6xl">
           Every tool you need,
           <br />
           <span className="bg-gradient-to-r from-indigo-500 via-fuchsia-500 to-pink-500 bg-clip-text text-transparent">free & private.</span>
         </h1>
 
-        <p className="mx-auto mt-5 max-w-2xl text-lg text-gray-600 animate-fade-up" style={{ animationDelay: "120ms" }}>
+        <p className="mx-auto mt-5 max-w-2xl text-lg text-gray-600">
           Edit PDFs, compress images, generate QR codes, calculate anything and more — all inside your browser. Your files never touch our servers.
         </p>
 
@@ -69,7 +69,7 @@ export default function Hero({ toolCount }: { toolCount: number }) {
               {suggestions.map((t) => (
                 <li key={t.slug}>
                   <Link href={t.href} className="flex items-center gap-3 rounded-xl px-3 py-2.5 hover:bg-gray-100">
-                    <t.icon className="h-5 w-5 text-brand" />
+                    <t.icon className="h-5 w-5 text-brand-ink" />
                     <span className="font-medium text-gray-900">{t.name}</span>
                     <span className="hidden truncate text-sm text-gray-500 sm:inline">— {t.description}</span>
                   </Link>
@@ -94,7 +94,7 @@ export default function Hero({ toolCount }: { toolCount: number }) {
           {[
             { icon: ShieldCheck, label: "Private by design", sub: "Processed on your device", c: "text-emerald-500" },
             { icon: Zap, label: "Instant", sub: "No upload wait", c: "text-amber-500" },
-            { icon: InfinityIcon, label: "No limits", sub: "Use as much as you like", c: "text-brand" },
+            { icon: InfinityIcon, label: "No limits", sub: "Use as much as you like", c: "text-brand-ink" },
             { icon: WifiOff, label: "Works offline", sub: "Once the page loads", c: "text-sky-500" },
           ].map(({ icon: I, label, sub, c }) => (
             <li key={label} className="flex flex-col items-center gap-1">

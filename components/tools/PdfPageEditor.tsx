@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { Download, Loader2, RotateCw, Trash2, Undo2, ChevronLeft, ChevronRight } from "lucide-react";
-import { PDFDocument, degrees } from "pdf-lib";
 import FileDropzone from "@/components/FileDropzone";
 import PdfFileBar from "@/components/tools/PdfFileBar";
 import { baseName, downloadBlob } from "@/components/ui/kit";
@@ -50,6 +49,7 @@ export default function PdfPageEditor({ mode }: { mode: "organize" | "remove" })
   const patch = (i: number, p: Partial<PageItem>) => setPages(pages.map((x, j) => (j === i ? { ...x, ...p } : x)));
 
   const save = async () => {
+    const { PDFDocument, degrees } = await import("pdf-lib"); // loaded on demand (keeps page load light)
     if (!file) return;
     const keep = pages.filter((p) => !p.deleted);
     if (!keep.length) return setErr("You can't remove every page.");

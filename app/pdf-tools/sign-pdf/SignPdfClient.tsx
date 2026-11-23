@@ -1,8 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { PDFDocument } from "pdf-lib";
-import * as pdfjsLib from "pdfjs-dist";
+import { getPdfjs } from "@/lib/pdf";
 import SignatureCanvas from "react-signature-canvas";
 import { toast } from "sonner";
 
@@ -12,7 +11,6 @@ import PdfPreview from "@/components/PdfPreview";
 import SignatureToolbar from "@/components/SignatureToolbar";
 import type { SignaturePlacement } from "@/components/SignatureOverlay";
 
-pdfjsLib.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
 
 export default function SignPdfPage() {
   const [file, setFile] = useState<File | null>(null);
@@ -55,6 +53,7 @@ export default function SignPdfPage() {
   const [signatureDataUrl, setSignatureDataUrl] = useState<string | null>(null);
 
   const generatePreview = async (pdfFile: File) => {
+    const pdfjsLib = await getPdfjs();
     const bytes = await pdfFile.arrayBuffer();
 
     const pdf = await pdfjsLib.getDocument({
@@ -118,6 +117,7 @@ export default function SignPdfPage() {
   };
 
   const handleFiles = async (files: File[]) => {
+    const { PDFDocument } = await import("pdf-lib"); // loaded on demand (keeps page load light)
     const pdfFile = files[0];
 
     if (!pdfFile) return;
@@ -231,6 +231,7 @@ export default function SignPdfPage() {
   };
 
   const signPdf = async () => {
+    const { PDFDocument } = await import("pdf-lib"); // loaded on demand (keeps page load light)
     if (!file) {
       toast.error("Please upload a PDF");
       return;

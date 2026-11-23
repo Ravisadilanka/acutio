@@ -65,7 +65,7 @@ export default function CategoryPage({ id }: { id: CategoryId }) {
           {categories
             .filter((c) => c.id !== id)
             .map((c) => (
-              <Link key={c.id} href={c.href} className="chip flex items-center gap-2 bg-surface">
+              <Link key={c.id} href={c.href} prefetch={false} className="chip flex items-center gap-2 bg-surface">
                 <c.icon className="h-4 w-4" /> {c.name}
               </Link>
             ))}

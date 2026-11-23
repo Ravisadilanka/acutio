@@ -86,7 +86,7 @@ export function Stat({ label, value, hint, accent = false }: { label: string; va
   return (
     <div className={accent ? "rounded-2xl border border-brand/30 bg-brand-soft p-4" : "stat"}>
       <div className="stat-label">{label}</div>
-      <div className={`stat-value ${accent ? "text-brand" : ""}`}>{value}</div>
+      <div className={`stat-value ${accent ? "text-brand-ink" : ""}`}>{value}</div>
       {hint && <div className="mt-1 text-sm text-gray-500">{hint}</div>}
     </div>
   );

@@ -66,7 +66,7 @@ export default function Client() {
 
   const Key = ({ k }: { k: string }) => {
     const style =
-      k === "=" ? "bg-brand text-white hover:bg-brand-hover" : /^[÷×\-+%]$/.test(k) ? "bg-brand-soft text-brand hover:bg-brand/20" : /^(C|⌫)$/.test(k) ? "bg-gray-200 text-gray-900 hover:bg-gray-300" : "bg-gray-100 text-gray-900 hover:bg-gray-200";
+      k === "=" ? "bg-brand text-white hover:bg-brand-hover" : /^[÷×\-+%]$/.test(k) ? "bg-brand-soft text-brand-ink hover:bg-brand/20" : /^(C|⌫)$/.test(k) ? "bg-gray-200 text-gray-900 hover:bg-gray-300" : "bg-gray-100 text-gray-900 hover:bg-gray-200";
     return (
       <button
         onClick={() => (k === "±" ? setExpr((e) => (e.startsWith("-(") && e.endsWith(")") ? e.slice(2, -1) : e ? `-(${e})` : "-")) : press(k))}

@@ -25,6 +25,9 @@
   --color-brand: #5046e5;
   --color-brand-hover: #4338ca;
   --color-brand-soft: rgb(80 70 229 / 0.1);
+  /* Brand colour for text/icons. Same as brand in light mode; lighter in dark
+     mode so small purple text stays readable (WCAG AA 4.5:1). */
+  --color-brand-ink: #5046e5;
 }
 
 .dark {
@@ -43,9 +46,12 @@
   --color-page: #0a0d14;
   --color-surface: #10141d;
   --color-line: #232a38;
-  --color-brand: #6d64ff;
-  --color-brand-hover: #8079ff;
+  /* Solid brand (backgrounds behind white text): 5.1:1 with white. */
+  --color-brand: #5f56f5;
+  --color-brand-hover: #5249e6;
   --color-brand-soft: rgb(109 100 255 / 0.15);
+  /* Brand text on dark surfaces: 5.4:1 on brand-soft, 6.3:1 on surface. */
+  --color-brand-ink: #8f89ff;
   color-scheme: dark;
 }
 
@@ -125,11 +131,11 @@
 }
 
 @utility chip {
-    @apply rounded-full border px-3 py-1.5 text-sm font-medium text-gray-700 transition hover:border-brand hover:text-brand;
+    @apply rounded-full border px-3 py-1.5 text-sm font-medium text-gray-700 transition hover:border-brand hover:text-brand-ink;
 }
 
 @utility chip-active {
-    @apply border-brand bg-brand-soft text-brand;
+    @apply border-brand bg-brand-soft text-brand-ink;
 }
 
 @utility stat {

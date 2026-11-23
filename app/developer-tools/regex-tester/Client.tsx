@@ -62,7 +62,7 @@ export default function Client() {
         {r.err && <p className="mt-3 text-sm text-rose-500">{r.err}</p>}
         <div className="mt-3 flex flex-wrap gap-2 text-xs">
           <span className="text-gray-500">Library:</span>
-          {library.map((x) => <button key={x.name} className="text-brand hover:underline" onClick={() => setPattern(x.p)}>{x.name}</button>)}
+          {library.map((x) => <button key={x.name} className="text-brand-ink hover:underline" onClick={() => setPattern(x.p)}>{x.name}</button>)}
         </div>
       </Panel>
 
